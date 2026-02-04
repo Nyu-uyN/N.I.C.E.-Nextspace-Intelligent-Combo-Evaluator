@@ -1,0 +1,3611 @@
+[
+  {
+    "Id": 0,
+    "Name": "Symmetric",
+    "Rarity": 0,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For having a symmetric rocket",
+    "Mission": false
+  },
+  {
+    "Id": 1,
+    "Name": "Perfectly Symmetric",
+    "Rarity": 1,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For having a perfectly symmetric rocket",
+    "Mission": false
+  },
+  {
+    "Id": 2,
+    "Name": "Unsymmetric",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For having a unsymmetric rocket",
+    "Mission": false
+  },
+  {
+    "Id": 3,
+    "Name": "Extremely Unsymmetric",
+    "Rarity": 2,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For having a completely unsymmetric rocket",
+    "Mission": false
+  },
+  {
+    "Id": 4,
+    "Name": "Thin",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For having the rocket width at least 5 times smaller than its height",
+    "Mission": false
+  },
+  {
+    "Id": 5,
+    "Name": "Flat",
+    "Rarity": 2,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For having the rocket width at least 5 times bigger than its height",
+    "Mission": false
+  },
+  {
+    "Id": 6,
+    "Name": "Square",
+    "Rarity": 1,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For having the rocket width the same as the rocket height",
+    "Mission": false
+  },
+  {
+    "Id": 7,
+    "Name": "Big",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For making a big rocket",
+    "Mission": false
+  },
+  {
+    "Id": 8,
+    "Name": "Giant",
+    "Rarity": 2,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For making a giant rocket",
+    "Mission": false
+  },
+  {
+    "Id": 9,
+    "Name": "Skeleton",
+    "Rarity": 3,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For having a rocket with only 10% of its mass consisting of structure parts",
+    "Mission": false
+  },
+  {
+    "Id": 10,
+    "Name": "Lightweight",
+    "Rarity": 1,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For having a rocket weighing less than 1 kilogram",
+    "Mission": false
+  },
+  {
+    "Id": 11,
+    "Name": "Purist",
+    "Rarity": 1,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using only one structure set",
+    "Mission": false
+  },
+  {
+    "Id": 12,
+    "Name": "Collage",
+    "Rarity": 2,
+    "Categories": ["AWESOME", "COOL"],
+    "Controversial": false,
+    "Description": "For using 5 different structure sets",
+    "Mission": false
+  },
+  {
+    "Id": 13,
+    "Name": "Minimal",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using only 1 structure part",
+    "Mission": false
+  },
+  {
+    "Id": 14,
+    "Name": "Complicated",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using at least 25 structure parts",
+    "Mission": false
+  },
+  {
+    "Id": 15,
+    "Name": "Monolith",
+    "Rarity": 4,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For having a rocket of at least 2 meters tall while using only 1 structure part",
+    "Mission": false
+  },
+  {
+    "Id": 16,
+    "Name": "Plank",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using a plank",
+    "Mission": false
+  },
+  {
+    "Id": 17,
+    "Name": "Pallet",
+    "Rarity": 1,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using a pallet",
+    "Mission": false
+  },
+  {
+    "Id": 18,
+    "Name": "Toilet Roll",
+    "Rarity": 0,
+    "Categories": ["NOOB", "GROSS"],
+    "Controversial": false,
+    "Description": "For using a toilet roll",
+    "Mission": false
+  },
+  {
+    "Id": 19,
+    "Name": "Pandemic",
+    "Rarity": 3,
+    "Categories": ["FUNNY", "GROSS"],
+    "Controversial": false,
+    "Description": "For using 5 toilet rolls",
+    "Mission": false
+  },
+  {
+    "Id": 20,
+    "Name": "Tin Can",
+    "Rarity": 0,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a tin can",
+    "Mission": false
+  },
+  {
+    "Id": 21,
+    "Name": "Football",
+    "Rarity": 1,
+    "Categories": ["GROSS", "COOL"],
+    "Controversial": false,
+    "Description": "For using a football",
+    "Mission": false
+  },
+  {
+    "Id": 22,
+    "Name": "Soccer",
+    "Rarity": 2,
+    "Categories": ["NOOB", "FUNNY"],
+    "Controversial": false,
+    "Description": "For using 2 footballs",
+    "Mission": false
+  },
+  {
+    "Id": 23,
+    "Name": "Funnel",
+    "Rarity": 0,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a funnel",
+    "Mission": false
+  },
+  {
+    "Id": 24,
+    "Name": "Keyboard",
+    "Rarity": 1,
+    "Categories": ["NERDY", "GROSS"],
+    "Controversial": false,
+    "Description": "For using a keyboard",
+    "Mission": false
+  },
+  {
+    "Id": 25,
+    "Name": "Sit",
+    "Rarity": 0,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a stool",
+    "Mission": false
+  },
+  {
+    "Id": 26,
+    "Name": "BBQ",
+    "Rarity": 0,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using tongs",
+    "Mission": false
+  },
+  {
+    "Id": 27,
+    "Name": "Clean",
+    "Rarity": 0,
+    "Categories": ["GROSS", "FUNNY"],
+    "Controversial": false,
+    "Description": "For using a vacuum",
+    "Mission": false
+  },
+  {
+    "Id": 28,
+    "Name": "Rim Job",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY", "FUNNY"],
+    "Controversial": true,
+    "Description": "For using a steel rim",
+    "Mission": false
+  },
+  {
+    "Id": 29,
+    "Name": "Muffled",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a muffler",
+    "Mission": false
+  },
+  {
+    "Id": 30,
+    "Name": "Brake",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using a brake disk",
+    "Mission": false
+  },
+  {
+    "Id": 31,
+    "Name": "High Level",
+    "Rarity": 1,
+    "Categories": ["FUNNY", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a ladder",
+    "Mission": false
+  },
+  {
+    "Id": 32,
+    "Name": "Saw",
+    "Rarity": 1,
+    "Categories": ["WEIRD", "WILD"],
+    "Controversial": false,
+    "Description": "For using a table saw",
+    "Mission": false
+  },
+  {
+    "Id": 33,
+    "Name": "Slide",
+    "Rarity": 1,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a slide end",
+    "Mission": false
+  },
+  {
+    "Id": 34,
+    "Name": "Wiper",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a windshield wiper",
+    "Mission": false
+  },
+  {
+    "Id": 35,
+    "Name": "Umbrella",
+    "Rarity": 2,
+    "Categories": ["COOL", "CUTE"],
+    "Controversial": false,
+    "Description": "For using an umbrella",
+    "Mission": false
+  },
+  {
+    "Id": 36,
+    "Name": "Poppins",
+    "Rarity": 3,
+    "Categories": ["NERDY", "CUTE"],
+    "Controversial": false,
+    "Description": "For using a umbrella at the top rocket",
+    "Mission": false
+  },
+  {
+    "Id": 37,
+    "Name": "StarTube",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a StarTube cap",
+    "Mission": false
+  },
+  {
+    "Id": 38,
+    "Name": "Breakfast",
+    "Rarity": 1,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a toaster",
+    "Mission": false
+  },
+  {
+    "Id": 39,
+    "Name": "Loud",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using a megaphone",
+    "Mission": false
+  },
+  {
+    "Id": 40,
+    "Name": "Internet",
+    "Rarity": 2,
+    "Categories": ["NERDY", "CLEVER"],
+    "Controversial": false,
+    "Description": "For using a router",
+    "Mission": false
+  },
+  {
+    "Id": 41,
+    "Name": "Crazy",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "FUNNY"],
+    "Controversial": false,
+    "Description": "For using a lampshade",
+    "Mission": false
+  },
+  {
+    "Id": 42,
+    "Name": "Clamp",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a clamp",
+    "Mission": false
+  },
+  {
+    "Id": 43,
+    "Name": "Fidget Spinner",
+    "Rarity": 3,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a fidget spinner",
+    "Mission": false
+  },
+  {
+    "Id": 44,
+    "Name": "Graffiti",
+    "Rarity": 1,
+    "Categories": ["COOL", "WILD"],
+    "Controversial": false,
+    "Description": "For using a graffiti can",
+    "Mission": false
+  },
+  {
+    "Id": 45,
+    "Name": "Music",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a guitar",
+    "Mission": false
+  },
+  {
+    "Id": 46,
+    "Name": "Stop",
+    "Rarity": 3,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a stop sign",
+    "Mission": false
+  },
+  {
+    "Id": 47,
+    "Name": "Lit",
+    "Rarity": 1,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using an industrial light",
+    "Mission": false
+  },
+  {
+    "Id": 48,
+    "Name": "Cock",
+    "Rarity": 3,
+    "Categories": ["NAUGHTY", "WILD"],
+    "Controversial": true,
+    "Description": "For using a weathercock",
+    "Mission": false
+  },
+  {
+    "Id": 49,
+    "Name": "Top",
+    "Rarity": 1,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a spinning top",
+    "Mission": false
+  },
+  {
+    "Id": 50,
+    "Name": "Chopsticks",
+    "Rarity": 1,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For using 2 toy sticks",
+    "Mission": false
+  },
+  {
+    "Id": 51,
+    "Name": "Mikado",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using 5 toy sticks",
+    "Mission": false
+  },
+  {
+    "Id": 52,
+    "Name": "Rings",
+    "Rarity": 0,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a ring pyramid",
+    "Mission": false
+  },
+  {
+    "Id": 53,
+    "Name": "Train",
+    "Rarity": 1,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a wooden train",
+    "Mission": false
+  },
+  {
+    "Id": 54,
+    "Name": "Elephant",
+    "Rarity": 1,
+    "Categories": ["WILD", "CUTE"],
+    "Controversial": false,
+    "Description": "For using a stuffed elephant",
+    "Mission": false
+  },
+  {
+    "Id": 55,
+    "Name": "Jumbo",
+    "Rarity": 2,
+    "Categories": ["WILD", "CUTE"],
+    "Controversial": false,
+    "Description": "For using 2 stuffed elephants",
+    "Mission": false
+  },
+  {
+    "Id": 56,
+    "Name": "Horse",
+    "Rarity": 2,
+    "Categories": ["WILD", "CUTE"],
+    "Controversial": false,
+    "Description": "For using a rocking horse",
+    "Mission": false
+  },
+  {
+    "Id": 57,
+    "Name": "Stable",
+    "Rarity": 3,
+    "Categories": ["WILD", "CUTE"],
+    "Controversial": false,
+    "Description": "For using 4 rocking horses",
+    "Mission": false
+  },
+  {
+    "Id": 58,
+    "Name": "Teddy Bear",
+    "Rarity": 0,
+    "Categories": ["CUTE", "WILD"],
+    "Controversial": false,
+    "Description": "For using a teddy bear",
+    "Mission": false
+  },
+  {
+    "Id": 59,
+    "Name": "Cuddly",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using 3 teddy bears",
+    "Mission": false
+  },
+  {
+    "Id": 60,
+    "Name": "Teddy Nose",
+    "Rarity": 1,
+    "Categories": ["FUNNY", "CUTE"],
+    "Controversial": false,
+    "Description": "For using a teddy bear at the top of the rocket",
+    "Mission": false
+  },
+  {
+    "Id": 61,
+    "Name": "Baby",
+    "Rarity": 0,
+    "Categories": ["CREEPY", "CUTE"],
+    "Controversial": false,
+    "Description": "For using a baby",
+    "Mission": false
+  },
+  {
+    "Id": 62,
+    "Name": "Conjoined Twin",
+    "Rarity": 2,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using 2 babies that are attached to each other",
+    "Mission": false
+  },
+  {
+    "Id": 63,
+    "Name": "Baby Centipede",
+    "Rarity": 3,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using 3 babies that are all attached to each other",
+    "Mission": false
+  },
+  {
+    "Id": 64,
+    "Name": "Baby Centipede 2",
+    "Rarity": 4,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using 12 babies that are all attached to each other",
+    "Mission": false
+  },
+  {
+    "Id": 65,
+    "Name": "Bot",
+    "Rarity": 1,
+    "Categories": ["CUTE", "COOL"],
+    "Controversial": false,
+    "Description": "For using a robot",
+    "Mission": false
+  },
+  {
+    "Id": 66,
+    "Name": "Astronaut",
+    "Rarity": 3,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a space shuttle",
+    "Mission": false
+  },
+  {
+    "Id": 67,
+    "Name": "Moon",
+    "Rarity": 3,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a moon rocket",
+    "Mission": false
+  },
+  {
+    "Id": 68,
+    "Name": "Flamingo",
+    "Rarity": 2,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a flamingo",
+    "Mission": false
+  },
+  {
+    "Id": 69,
+    "Name": "Frame",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a bike frame",
+    "Mission": false
+  },
+  {
+    "Id": 70,
+    "Name": "Saddle",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a bike saddle",
+    "Mission": false
+  },
+  {
+    "Id": 71,
+    "Name": "Bottle",
+    "Rarity": 0,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a fuel bottle",
+    "Mission": false
+  },
+  {
+    "Id": 72,
+    "Name": "Motorcycle",
+    "Rarity": 1,
+    "Categories": ["COOL", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using a motorcycle tank",
+    "Mission": false
+  },
+  {
+    "Id": 73,
+    "Name": "Truck",
+    "Rarity": 2,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a truck fuel tank",
+    "Mission": false
+  },
+  {
+    "Id": 74,
+    "Name": "Tzar",
+    "Rarity": 3,
+    "Categories": ["CREEPY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using a Tzar bomba",
+    "Mission": false
+  },
+  {
+    "Id": 75,
+    "Name": "Junk",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a junk engine",
+    "Mission": false
+  },
+  {
+    "Id": 76,
+    "Name": "Techno",
+    "Rarity": 2,
+    "Categories": ["COOL", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using a techno jet",
+    "Mission": false
+  },
+  {
+    "Id": 77,
+    "Name": "Ultimate",
+    "Rarity": 3,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using a ultimate engine",
+    "Mission": false
+  },
+  {
+    "Id": 78,
+    "Name": "Gate",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a gate",
+    "Mission": false
+  },
+  {
+    "Id": 79,
+    "Name": "Leaf Blower",
+    "Rarity": 2,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a leaf blower pump",
+    "Mission": false
+  },
+  {
+    "Id": 80,
+    "Name": "Cherry",
+    "Rarity": 0,
+    "Categories": ["CUTE", "NOOB"],
+    "Controversial": false,
+    "Description": "For using a cherry bomb",
+    "Mission": false
+  },
+  {
+    "Id": 81,
+    "Name": "Illegal",
+    "Rarity": 1,
+    "Categories": ["NAUGHTY"],
+    "Controversial": false,
+    "Description": "For using an illegal firework",
+    "Mission": false
+  },
+  {
+    "Id": 82,
+    "Name": "Firecracker",
+    "Rarity": 0,
+    "Categories": ["NAUGHTY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using a firecracker",
+    "Mission": false
+  },
+  {
+    "Id": 83,
+    "Name": "Chinese Roll",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 6 firecrackers",
+    "Mission": false
+  },
+  {
+    "Id": 84,
+    "Name": "Molotov",
+    "Rarity": 1,
+    "Categories": ["NAUGHTY", "CREEPY"],
+    "Controversial": false,
+    "Description": "For using a Molotov cocktail",
+    "Mission": false
+  },
+  {
+    "Id": 85,
+    "Name": "Dynamite",
+    "Rarity": 1,
+    "Categories": ["NAUGHTY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using a dynamite",
+    "Mission": false
+  },
+  {
+    "Id": 86,
+    "Name": "Swivel",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a swivel",
+    "Mission": false
+  },
+  {
+    "Id": 87,
+    "Name": "Decoupler",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a decoupler",
+    "Mission": false
+  },
+  {
+    "Id": 88,
+    "Name": "Satellite",
+    "Rarity": 2,
+    "Categories": ["CLEVER", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a satellite",
+    "Mission": false
+  },
+  {
+    "Id": 89,
+    "Name": "Passion",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY"],
+    "Controversial": false,
+    "Description": "For using a passion firework",
+    "Mission": false
+  },
+  {
+    "Id": 90,
+    "Name": "Death",
+    "Rarity": 3,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using 4 purple smokers",
+    "Mission": false
+  },
+  {
+    "Id": 91,
+    "Name": "Rocket Kit",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using the rocket kit set",
+    "Mission": false
+  },
+  {
+    "Id": 92,
+    "Name": "Beginner",
+    "Rarity": 0,
+    "Categories": ["NOOB", "CUTE"],
+    "Controversial": false,
+    "Description": "For only the rocket kit structure set",
+    "Mission": false
+  },
+  {
+    "Id": 93,
+    "Name": "Completed Kit",
+    "Rarity": 1,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using a completed rocket kit set",
+    "Mission": false
+  },
+  {
+    "Id": 94,
+    "Name": "Double Kit",
+    "Rarity": 2,
+    "Categories": ["NOOB", "NERDY"],
+    "Controversial": false,
+    "Description": "For using a completed rocket kit set twice",
+    "Mission": false
+  },
+  {
+    "Id": 95,
+    "Name": "Collector",
+    "Rarity": 4,
+    "Categories": ["NOOB", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 14 different rocket kit parts",
+    "Mission": false
+  },
+  {
+    "Id": 96,
+    "Name": "Trash",
+    "Rarity": 0,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using the trash set",
+    "Mission": false
+  },
+  {
+    "Id": 97,
+    "Name": "Recycler",
+    "Rarity": 2,
+    "Categories": ["GROSS", "WILD"],
+    "Controversial": false,
+    "Description": "For using only the trash structure set",
+    "Mission": false
+  },
+  {
+    "Id": 98,
+    "Name": "Trash Crafter",
+    "Rarity": 1,
+    "Categories": ["GROSS", "COOL"],
+    "Controversial": false,
+    "Description": "For using 3 different trash parts",
+    "Mission": false
+  },
+  {
+    "Id": 99,
+    "Name": "Trash King",
+    "Rarity": 3,
+    "Categories": ["GROSS", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 8 different trash parts",
+    "Mission": false
+  },
+  {
+    "Id": 100,
+    "Name": "Toys",
+    "Rarity": 0,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using the toy set",
+    "Mission": false
+  },
+  {
+    "Id": 101,
+    "Name": "Playtime",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using only the toy structure set",
+    "Mission": false
+  },
+  {
+    "Id": 102,
+    "Name": "Toy Freak",
+    "Rarity": 3,
+    "Categories": ["CUTE", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 13 different toy parts",
+    "Mission": false
+  },
+  {
+    "Id": 103,
+    "Name": "PVC",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using the PVC set",
+    "Mission": false
+  },
+  {
+    "Id": 104,
+    "Name": "DIY",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using only the PVC structure set",
+    "Mission": false
+  },
+  {
+    "Id": 105,
+    "Name": "Sewer System",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "CLEVER"],
+    "Controversial": false,
+    "Description": "For using 10 PVC parts and no other structure sets",
+    "Mission": false
+  },
+  {
+    "Id": 106,
+    "Name": "Plumber",
+    "Rarity": 3,
+    "Categories": ["CLEVER", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 19 different PVC parts",
+    "Mission": false
+  },
+  {
+    "Id": 107,
+    "Name": "Bike",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using the bike set",
+    "Mission": false
+  },
+  {
+    "Id": 108,
+    "Name": "Bicycle",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "COOL"],
+    "Controversial": false,
+    "Description": "For using only the bike structure set",
+    "Mission": false
+  },
+  {
+    "Id": 109,
+    "Name": "Cyclist",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using 4 different bike parts",
+    "Mission": false
+  },
+  {
+    "Id": 110,
+    "Name": "Full Bike",
+    "Rarity": 2,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For making a complete bike",
+    "Mission": false
+  },
+  {
+    "Id": 111,
+    "Name": "Scrap",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a scrap part",
+    "Mission": false
+  },
+  {
+    "Id": 112,
+    "Name": "Metal",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "COOL"],
+    "Controversial": false,
+    "Description": "For using only the scrap structure set",
+    "Mission": false
+  },
+  {
+    "Id": 113,
+    "Name": "Junkyard",
+    "Rarity": 3,
+    "Categories": ["WEIRD", "GROSS"],
+    "Controversial": false,
+    "Description": "For using 25 different scrap parts",
+    "Mission": false
+  },
+  {
+    "Id": 114,
+    "Name": "Wood",
+    "Rarity": 0,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using the wood set",
+    "Mission": false
+  },
+  {
+    "Id": 115,
+    "Name": "Tree",
+    "Rarity": 2,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using only the wood structure set",
+    "Mission": false
+  },
+  {
+    "Id": 116,
+    "Name": "Lumberjack",
+    "Rarity": 3,
+    "Categories": ["WILD", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 24 different wood parts",
+    "Mission": false
+  },
+  {
+    "Id": 117,
+    "Name": "Pool",
+    "Rarity": 0,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a pool part",
+    "Mission": false
+  },
+  {
+    "Id": 118,
+    "Name": "Fiberglass",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using only the pool structure set",
+    "Mission": false
+  },
+  {
+    "Id": 119,
+    "Name": "Lifeguard",
+    "Rarity": 3,
+    "Categories": ["COOL", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 20 different pool parts",
+    "Mission": false
+  },
+  {
+    "Id": 120,
+    "Name": "Retro",
+    "Rarity": 0,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a retro part",
+    "Mission": false
+  },
+  {
+    "Id": 121,
+    "Name": "Thunder Bird",
+    "Rarity": 2,
+    "Categories": ["NERDY", "WILD"],
+    "Controversial": false,
+    "Description": "For using only the retro structure set",
+    "Mission": false
+  },
+  {
+    "Id": 122,
+    "Name": "Antique",
+    "Rarity": 4,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using 13 different retro parts",
+    "Mission": false
+  },
+  {
+    "Id": 123,
+    "Name": "Next Space Rebel",
+    "Rarity": 0,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a NSR part",
+    "Mission": false
+  },
+  {
+    "Id": 124,
+    "Name": "Modern",
+    "Rarity": 1,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using only the NSR structure set",
+    "Mission": false
+  },
+  {
+    "Id": 125,
+    "Name": "Suborbital",
+    "Rarity": 3,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using 23 different NSR parts",
+    "Mission": false
+  },
+  {
+    "Id": 126,
+    "Name": "Mannequin",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a mannequin part",
+    "Mission": false
+  },
+  {
+    "Id": 127,
+    "Name": "Golem",
+    "Rarity": 3,
+    "Categories": ["WEIRD", "NERDY"],
+    "Controversial": false,
+    "Description": "For using only the mannequin structure set",
+    "Mission": false
+  },
+  {
+    "Id": 128,
+    "Name": "Display",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "CUTE"],
+    "Controversial": false,
+    "Description": "For using 7 different mannequin parts",
+    "Mission": false
+  },
+  {
+    "Id": 129,
+    "Name": "Dandy Deer",
+    "Rarity": 0,
+    "Categories": ["WEIRD", "WILD"],
+    "Controversial": false,
+    "Description": "For using a Dandy Deer part",
+    "Mission": false
+  },
+  {
+    "Id": 130,
+    "Name": "Reindeer",
+    "Rarity": 3,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using only the Dandy Deer structure set",
+    "Mission": false
+  },
+  {
+    "Id": 131,
+    "Name": "Furry",
+    "Rarity": 2,
+    "Categories": ["NERDY", "WILD"],
+    "Controversial": false,
+    "Description": "For using 7 different Dandy Deer parts",
+    "Mission": false
+  },
+  {
+    "Id": 132,
+    "Name": "Diversity",
+    "Rarity": 3,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 10 different other parts",
+    "Mission": false
+  },
+  {
+    "Id": 133,
+    "Name": "Boost",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using a booster",
+    "Mission": false
+  },
+  {
+    "Id": 134,
+    "Name": "Extra Boost",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using 2 boosters",
+    "Mission": false
+  },
+  {
+    "Id": 135,
+    "Name": "Power Boost",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 3 boosters",
+    "Mission": false
+  },
+  {
+    "Id": 136,
+    "Name": "Mega Boost",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 4 boosters",
+    "Mission": false
+  },
+  {
+    "Id": 137,
+    "Name": "Giga Boost",
+    "Rarity": 2,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 5 boosters",
+    "Mission": false
+  },
+  {
+    "Id": 138,
+    "Name": "Booster Pack",
+    "Rarity": 2,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using 4 different boosters",
+    "Mission": false
+  },
+  {
+    "Id": 139,
+    "Name": "Fuel",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a fuel tank",
+    "Mission": false
+  },
+  {
+    "Id": 140,
+    "Name": "Juice",
+    "Rarity": 1,
+    "Categories": ["CUTE", "GROSS"],
+    "Controversial": false,
+    "Description": "For using 3 fuel tanks",
+    "Mission": false
+  },
+  {
+    "Id": 141,
+    "Name": "Bloated",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "GROSS"],
+    "Controversial": false,
+    "Description": "For using 5 fuel tanks",
+    "Mission": false
+  },
+  {
+    "Id": 142,
+    "Name": "Gas Station",
+    "Rarity": 4,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using 15 different fuel tanks",
+    "Mission": false
+  },
+  {
+    "Id": 143,
+    "Name": "Oxygen",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using an oxygen tank",
+    "Mission": false
+  },
+  {
+    "Id": 144,
+    "Name": "Scientist",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using 3 different oxygen tanks",
+    "Mission": false
+  },
+  {
+    "Id": 145,
+    "Name": "Engine",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using an engine",
+    "Mission": false
+  },
+  {
+    "Id": 146,
+    "Name": "Motor",
+    "Rarity": 2,
+    "Categories": ["CLEVER", "COOL"],
+    "Controversial": false,
+    "Description": "For using 2 engines",
+    "Mission": false
+  },
+  {
+    "Id": 147,
+    "Name": "Powerhouse",
+    "Rarity": 3,
+    "Categories": ["CLEVER", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 4 engines",
+    "Mission": false
+  },
+  {
+    "Id": 148,
+    "Name": "Engineer",
+    "Rarity": 4,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using 10 different engines",
+    "Mission": false
+  },
+  {
+    "Id": 149,
+    "Name": "Connection",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a connection part",
+    "Mission": false
+  },
+  {
+    "Id": 150,
+    "Name": "Network",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using 5 different connection parts",
+    "Mission": false
+  },
+  {
+    "Id": 151,
+    "Name": "Pump",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a pump",
+    "Mission": false
+  },
+  {
+    "Id": 152,
+    "Name": "Pump Tower",
+    "Rarity": 3,
+    "Categories": ["NAUGHTY", "GROSS"],
+    "Controversial": true,
+    "Description": "For using 4 pumps on top of each other",
+    "Mission": false
+  },
+  {
+    "Id": 153,
+    "Name": "Force",
+    "Rarity": 2,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 5 different pumps",
+    "Mission": false
+  },
+  {
+    "Id": 154,
+    "Name": "Fireworks",
+    "Rarity": 0,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using the fireworks set",
+    "Mission": false
+  },
+  {
+    "Id": 155,
+    "Name": "Pyromaniac",
+    "Rarity": 1,
+    "Categories": ["AWESOME", "CREEPY"],
+    "Controversial": false,
+    "Description": "For using 3 firework parts",
+    "Mission": false
+  },
+  {
+    "Id": 156,
+    "Name": "Flower Power",
+    "Rarity": 2,
+    "Categories": ["AWESOME", "WILD"],
+    "Controversial": false,
+    "Description": "For using 3 different firework flowers",
+    "Mission": false
+  },
+  {
+    "Id": 157,
+    "Name": "New Years Eve",
+    "Rarity": 3,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 9 different firework parts",
+    "Mission": false
+  },
+  {
+    "Id": 158,
+    "Name": "Kinetic",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a kinetic part",
+    "Mission": false
+  },
+  {
+    "Id": 159,
+    "Name": "Double Barrel",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using 2 upward straight parts at the same height",
+    "Mission": false
+  },
+  {
+    "Id": 160,
+    "Name": "Trident",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using 3 upward straight parts at roughly the same height that are not attached to each other",
+    "Mission": false
+  },
+  {
+    "Id": 161,
+    "Name": "Cross",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For combining 2 rectangle shaped part to create a cross shape",
+    "Mission": false
+  },
+  {
+    "Id": 162,
+    "Name": "T-Bone",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For combining 2 rectangle shaped part to create a T shape",
+    "Mission": false
+  },
+  {
+    "Id": 163,
+    "Name": "V-Shape",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For combining 2 rectangle shaped part to create a V shape",
+    "Mission": false
+  },
+  {
+    "Id": 164,
+    "Name": "Triforce",
+    "Rarity": 3,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using 3 triangles stacked in a pyramid",
+    "Mission": false
+  },
+  {
+    "Id": 165,
+    "Name": "Three-Leaf Clover",
+    "Rarity": 2,
+    "Categories": ["WILD", "CLEVER"],
+    "Controversial": false,
+    "Description": "For using 3 round parts in a three-leaf clover shape",
+    "Mission": false
+  },
+  {
+    "Id": 166,
+    "Name": "Four-Leaf Clover",
+    "Rarity": 3,
+    "Categories": ["WILD", "CLEVER"],
+    "Controversial": false,
+    "Description": "For using 4 round parts in a three-leaf clover shape",
+    "Mission": false
+  },
+  {
+    "Id": 167,
+    "Name": "Nose",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a nose part",
+    "Mission": false
+  },
+  {
+    "Id": 168,
+    "Name": "Nose Job",
+    "Rarity": 1,
+    "Categories": ["WEIRD", "CREEPY"],
+    "Controversial": false,
+    "Description": "For using 2 different nose parts",
+    "Mission": false
+  },
+  {
+    "Id": 169,
+    "Name": "Broken Nose",
+    "Rarity": 1,
+    "Categories": ["FUNNY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using a nose part that is not facing upwards",
+    "Mission": false
+  },
+  {
+    "Id": 170,
+    "Name": "Tail",
+    "Rarity": 0,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a tail part",
+    "Mission": false
+  },
+  {
+    "Id": 171,
+    "Name": "Twin Tail",
+    "Rarity": 1,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using 2 tail parts",
+    "Mission": false
+  },
+  {
+    "Id": 172,
+    "Name": "Inverted Tail",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "WILD"],
+    "Controversial": false,
+    "Description": "For using a tail part rotated downward",
+    "Mission": false
+  },
+  {
+    "Id": 173,
+    "Name": "Tail Diversity",
+    "Rarity": 1,
+    "Categories": ["WILD", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 different tail parts",
+    "Mission": false
+  },
+  {
+    "Id": 174,
+    "Name": "Nine Tails",
+    "Rarity": 3,
+    "Categories": ["NERDY", "WILD"],
+    "Controversial": false,
+    "Description": "For using 9 tail parts",
+    "Mission": false
+  },
+  {
+    "Id": 175,
+    "Name": "Arm",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a arm part",
+    "Mission": false
+  },
+  {
+    "Id": 176,
+    "Name": "Leg",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a leg part",
+    "Mission": false
+  },
+  {
+    "Id": 177,
+    "Name": "One-legged",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using only 1 leg part",
+    "Mission": false
+  },
+  {
+    "Id": 178,
+    "Name": "Insect",
+    "Rarity": 2,
+    "Categories": ["WILD", "CREEPY"],
+    "Controversial": false,
+    "Description": "For using 6 limbs",
+    "Mission": false
+  },
+  {
+    "Id": 179,
+    "Name": "Spider",
+    "Rarity": 3,
+    "Categories": ["WILD", "CREEPY"],
+    "Controversial": false,
+    "Description": "For using 8 limbs",
+    "Mission": false
+  },
+  {
+    "Id": 180,
+    "Name": "Millipede",
+    "Rarity": 4,
+    "Categories": ["CREEPY", "WILD"],
+    "Controversial": false,
+    "Description": "For using 10 limbs",
+    "Mission": false
+  },
+  {
+    "Id": 181,
+    "Name": "Head",
+    "Rarity": 0,
+    "Categories": ["WEIRD", "CREEPY"],
+    "Controversial": false,
+    "Description": "For using a head part",
+    "Mission": false
+  },
+  {
+    "Id": 182,
+    "Name": "Cerberus",
+    "Rarity": 2,
+    "Categories": ["NERDY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using 3 head parts",
+    "Mission": false
+  },
+  {
+    "Id": 183,
+    "Name": "Hydra",
+    "Rarity": 3,
+    "Categories": ["NERDY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using 9 head parts",
+    "Mission": false
+  },
+  {
+    "Id": 184,
+    "Name": "Torso",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a torso part",
+    "Mission": false
+  },
+  {
+    "Id": 185,
+    "Name": "Buff",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "COOL"],
+    "Controversial": false,
+    "Description": "For using 3 torso parts",
+    "Mission": false
+  },
+  {
+    "Id": 186,
+    "Name": "Wheel",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a wheel part",
+    "Mission": false
+  },
+  {
+    "Id": 187,
+    "Name": "Vehicle",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a wheel at the bottom of the rocket",
+    "Mission": false
+  },
+  {
+    "Id": 188,
+    "Name": "Smoker",
+    "Rarity": 0,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a smoker part",
+    "Mission": false
+  },
+  {
+    "Id": 189,
+    "Name": "Spring",
+    "Rarity": 0,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a spring part",
+    "Mission": false
+  },
+  {
+    "Id": 190,
+    "Name": "Barrel",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a barrel part",
+    "Mission": false
+  },
+  {
+    "Id": 191,
+    "Name": "Wheelbarrow",
+    "Rarity": 0,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a wheelbarrow part",
+    "Mission": false
+  },
+  {
+    "Id": 192,
+    "Name": "Jerrycan",
+    "Rarity": 0,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a jerrycan part",
+    "Mission": false
+  },
+  {
+    "Id": 193,
+    "Name": "Algae",
+    "Rarity": 0,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a algae part",
+    "Mission": false
+  },
+  {
+    "Id": 194,
+    "Name": "Balls",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "NAUGHTY"],
+    "Controversial": false,
+    "Description": "For using 2 balls that are attached to each other",
+    "Mission": false
+  },
+  {
+    "Id": 195,
+    "Name": "Juggler",
+    "Rarity": 2,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For using 3 balls",
+    "Mission": false
+  },
+  {
+    "Id": 196,
+    "Name": "Pro Juggler",
+    "Rarity": 3,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using 5 balls",
+    "Mission": false
+  },
+  {
+    "Id": 197,
+    "Name": "Rocket Kit XL",
+    "Rarity": 0,
+    "Categories": ["NOOB", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a rocket kit XL part",
+    "Mission": false
+  },
+  {
+    "Id": 198,
+    "Name": "Red",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 red parts",
+    "Mission": false
+  },
+  {
+    "Id": 199,
+    "Name": "Orange",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 orange parts",
+    "Mission": false
+  },
+  {
+    "Id": 200,
+    "Name": "Yellow",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 yellow parts",
+    "Mission": false
+  },
+  {
+    "Id": 201,
+    "Name": "Green",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 green parts",
+    "Mission": false
+  },
+  {
+    "Id": 202,
+    "Name": "Blue",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 blue parts",
+    "Mission": false
+  },
+  {
+    "Id": 203,
+    "Name": "Purple",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 purple parts",
+    "Mission": false
+  },
+  {
+    "Id": 204,
+    "Name": "Pink",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using 2 pink parts",
+    "Mission": false
+  },
+  {
+    "Id": 205,
+    "Name": "Car",
+    "Rarity": 2,
+    "Categories": ["CLEVER", "COOL"],
+    "Controversial": false,
+    "Description": "For using 3 car parts",
+    "Mission": false
+  },
+  {
+    "Id": 206,
+    "Name": "Toy Blocks",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using 4 different toy block parts",
+    "Mission": false
+  },
+  {
+    "Id": 207,
+    "Name": "Architect",
+    "Rarity": 3,
+    "Categories": ["CUTE", "CLEVER"],
+    "Controversial": false,
+    "Description": "For using every toy block",
+    "Mission": false
+  },
+  {
+    "Id": 208,
+    "Name": "Industrial",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using an industrial part",
+    "Mission": false
+  },
+  {
+    "Id": 209,
+    "Name": "Angel",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a halo shaped part on top of the rocket",
+    "Mission": false
+  },
+  {
+    "Id": 210,
+    "Name": "Winged",
+    "Rarity": 1,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using 2 wing shaped parts",
+    "Mission": false
+  },
+  {
+    "Id": 211,
+    "Name": "Bird Wings",
+    "Rarity": 3,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For combining 2 wing shaped parts with a figure",
+    "Mission": false
+  },
+  {
+    "Id": 212,
+    "Name": "Zoo",
+    "Rarity": 2,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using 3 different animal parts",
+    "Mission": false
+  },
+  {
+    "Id": 213,
+    "Name": "Crowd Control",
+    "Rarity": 3,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For having 5 different figure parts in the rocket",
+    "Mission": false
+  },
+  {
+    "Id": 214,
+    "Name": "Donut",
+    "Rarity": 3,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For creating a donut out of 4 of the same bend parts",
+    "Mission": false
+  },
+  {
+    "Id": 215,
+    "Name": "Shark",
+    "Rarity": 1,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using 2 side fins",
+    "Mission": false
+  },
+  {
+    "Id": 216,
+    "Name": "Tropical Paradise",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using 5 different pool slide parts",
+    "Mission": false
+  },
+  {
+    "Id": 217,
+    "Name": "Addicted",
+    "Rarity": 2,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using 10 smokers",
+    "Mission": false
+  },
+  {
+    "Id": 218,
+    "Name": "Blocky",
+    "Rarity": 1,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using 3 cube shaped parts",
+    "Mission": false
+  },
+  {
+    "Id": 219,
+    "Name": "Minecraft",
+    "Rarity": 3,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using only cube shaped structure parts",
+    "Mission": false
+  },
+  {
+    "Id": 220,
+    "Name": "Fashionable",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using only wrapped wood structure parts",
+    "Mission": false
+  },
+  {
+    "Id": 221,
+    "Name": "Tube",
+    "Rarity": 0,
+    "Categories": ["CLEVER", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using a tube part",
+    "Mission": false
+  },
+  {
+    "Id": 222,
+    "Name": "Ass",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY", "GROSS"],
+    "Controversial": true,
+    "Description": "For using a toilet roll and a windshield wiper",
+    "Mission": false
+  },
+  {
+    "Id": 223,
+    "Name": "Fart",
+    "Rarity": 2,
+    "Categories": ["GROSS"],
+    "Controversial": true,
+    "Description": "For using a toilet roll and a green smoker",
+    "Mission": false
+  },
+  {
+    "Id": 224,
+    "Name": "Quarantine",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "CREEPY"],
+    "Controversial": false,
+    "Description": "For combining a figure part with 4 toilet rolls",
+    "Mission": false
+  },
+  {
+    "Id": 225,
+    "Name": "Spin",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a fidget spinner and a spinning top",
+    "Mission": false
+  },
+  {
+    "Id": 226,
+    "Name": "Pipe Bomb",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For using PVC and an explosive",
+    "Mission": false
+  },
+  {
+    "Id": 227,
+    "Name": "Improviser",
+    "Rarity": 1,
+    "Categories": ["NOOB", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using the rocket kit set and a toilet roll",
+    "Mission": false
+  },
+  {
+    "Id": 228,
+    "Name": "Girly",
+    "Rarity": 1,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a teddy bear and a baby",
+    "Mission": false
+  },
+  {
+    "Id": 229,
+    "Name": "Baby Boom",
+    "Rarity": 2,
+    "Categories": ["FUNNY"],
+    "Controversial": true,
+    "Description": "For combining a baby and an explosive",
+    "Mission": false
+  },
+  {
+    "Id": 230,
+    "Name": "Tiny House",
+    "Rarity": 2,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For building a house with a toy block cube and roof",
+    "Mission": false
+  },
+  {
+    "Id": 231,
+    "Name": "Bear Skewer",
+    "Rarity": 2,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For combining a teddy bear and a toy stick",
+    "Mission": false
+  },
+  {
+    "Id": 232,
+    "Name": "Baby Satay",
+    "Rarity": 2,
+    "Categories": ["CREEPY", "FUNNY"],
+    "Controversial": true,
+    "Description": "For combining a baby and a toy stick",
+    "Mission": false
+  },
+  {
+    "Id": 233,
+    "Name": "Circus",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For combining a stuffed elephant and a ball part",
+    "Mission": false
+  },
+  {
+    "Id": 234,
+    "Name": "Sputnik",
+    "Rarity": 2,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For combining a ball part and 2 stick parts",
+    "Mission": false
+  },
+  {
+    "Id": 235,
+    "Name": "Old Fashioned",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a nose, body, tail and nothing else",
+    "Mission": false
+  },
+  {
+    "Id": 236,
+    "Name": "Penis",
+    "Rarity": 4,
+    "Categories": ["NAUGHTY", "GROSS"],
+    "Controversial": true,
+    "Description": "For making a long rocket with 2 round parts at the bottom",
+    "Mission": false
+  },
+  {
+    "Id": 237,
+    "Name": "Hotdog",
+    "Rarity": 1,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For sandwiching a booster between 2 other parts",
+    "Mission": false
+  },
+  {
+    "Id": 238,
+    "Name": "Gnome",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "CUTE"],
+    "Controversial": false,
+    "Description": "For combining a cone shaped part with a figure part",
+    "Mission": false
+  },
+  {
+    "Id": 239,
+    "Name": "Modern Classic",
+    "Rarity": 1,
+    "Categories": ["CLEVER", "NERDY"],
+    "Controversial": false,
+    "Description": "For using a retro part and a NSR part",
+    "Mission": false
+  },
+  {
+    "Id": 240,
+    "Name": "Hunting Trophy",
+    "Rarity": 1,
+    "Categories": ["CREEPY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For combining a Dandy Deer part and a wood part",
+    "Mission": false
+  },
+  {
+    "Id": 241,
+    "Name": "Seared Steak",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using a Dandy Deer limp and an explosion",
+    "Mission": false
+  },
+  {
+    "Id": 242,
+    "Name": "Birds",
+    "Rarity": 2,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a flamingo and a weathercock",
+    "Mission": false
+  },
+  {
+    "Id": 243,
+    "Name": "Lord of the Rings",
+    "Rarity": 3,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For combining a mannequin and a ring pyramid",
+    "Mission": false
+  },
+  {
+    "Id": 244,
+    "Name": "Frankenstein",
+    "Rarity": 2,
+    "Categories": ["CREEPY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using several body parts from different bodies",
+    "Mission": false
+  },
+  {
+    "Id": 245,
+    "Name": "Modular Body",
+    "Rarity": 1,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a head, a torso, two arms and two legs",
+    "Mission": false
+  },
+  {
+    "Id": 246,
+    "Name": "Gardener",
+    "Rarity": 2,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a wheelbarrow part and a flamingo",
+    "Mission": false
+  },
+  {
+    "Id": 247,
+    "Name": "Protest",
+    "Rarity": 2,
+    "Categories": ["AWESOME", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a megaphone and a Molotov cocktail",
+    "Mission": false
+  },
+  {
+    "Id": 248,
+    "Name": "Stink Bomb",
+    "Rarity": 1,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a green smoker and a trash part",
+    "Mission": false
+  },
+  {
+    "Id": 249,
+    "Name": "Rain",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using an umbrella and a windshield wiper",
+    "Mission": false
+  },
+  {
+    "Id": 250,
+    "Name": "Lightning",
+    "Rarity": 2,
+    "Categories": ["AWESOME", "COOL"],
+    "Controversial": false,
+    "Description": "For using an industrial light and a weathercock",
+    "Mission": false
+  },
+  {
+    "Id": 251,
+    "Name": "Rock",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using a guitar and a rocking horse",
+    "Mission": false
+  },
+  {
+    "Id": 252,
+    "Name": "War",
+    "Rarity": 3,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using a dynamite and a Tzar bomba",
+    "Mission": false
+  },
+  {
+    "Id": 253,
+    "Name": "Painter",
+    "Rarity": 2,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a graffiti can and a pallet",
+    "Mission": false
+  },
+  {
+    "Id": 254,
+    "Name": "Technical",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a decoupler and a swivel",
+    "Mission": false
+  },
+  {
+    "Id": 255,
+    "Name": "Mechanical",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For using a swivel and a robot",
+    "Mission": false
+  },
+  {
+    "Id": 256,
+    "Name": "Vintage",
+    "Rarity": 1,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a toy part and a retro part",
+    "Mission": false
+  },
+  {
+    "Id": 257,
+    "Name": "Pride",
+    "Rarity": 3,
+    "Categories": ["CUTE", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using all different colored smoker parts",
+    "Mission": false
+  },
+  {
+    "Id": 258,
+    "Name": "Bloody",
+    "Rarity": 1,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using a red smoker and a figure part",
+    "Mission": false
+  },
+  {
+    "Id": 259,
+    "Name": "Scrap Pirate",
+    "Rarity": 1,
+    "Categories": ["AWESOME", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using a scrap part and a NSR part",
+    "Mission": false
+  },
+  {
+    "Id": 260,
+    "Name": "Banksy",
+    "Rarity": 2,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a graffiti can and a Molotov cocktail",
+    "Mission": false
+  },
+  {
+    "Id": 261,
+    "Name": "Cocks",
+    "Rarity": 3,
+    "Categories": ["WILD", "NAUGHTY"],
+    "Controversial": true,
+    "Description": "For using a weathercock and a Molotov cocktail",
+    "Mission": false
+  },
+  {
+    "Id": 262,
+    "Name": "Alive",
+    "Rarity": 2,
+    "Categories": ["CREEPY", "CLEVER"],
+    "Controversial": false,
+    "Description": "For combining a limb and a swivel",
+    "Mission": false
+  },
+  {
+    "Id": 263,
+    "Name": "Dress-up",
+    "Rarity": 3,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a mannequin and combining it with 10 other parts from other sets",
+    "Mission": false
+  },
+  {
+    "Id": 264,
+    "Name": "Aqua",
+    "Rarity": 1,
+    "Categories": ["CUTE", "COOL"],
+    "Controversial": false,
+    "Description": "For using a blue smoker and a green smoker",
+    "Mission": false
+  },
+  {
+    "Id": 265,
+    "Name": "Space Program",
+    "Rarity": 3,
+    "Categories": ["ASPIRING", "NERDY"],
+    "Controversial": false,
+    "Description": "For using a space shuttle and a moon rocket",
+    "Mission": false
+  },
+  {
+    "Id": 266,
+    "Name": "Underwater",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a fin part and a blue smoker",
+    "Mission": false
+  },
+  {
+    "Id": 267,
+    "Name": "Woodpecker",
+    "Rarity": 1,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a bird and a wood part",
+    "Mission": false
+  },
+  {
+    "Id": 268,
+    "Name": "Kerbal",
+    "Rarity": 1,
+    "Categories": ["NERDY", "CLEVER"],
+    "Controversial": false,
+    "Description": "For combining a baby and a NSR part",
+    "Mission": false
+  },
+  {
+    "Id": 269,
+    "Name": "Dutch",
+    "Rarity": 1,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For using a bike part and an orange smoker",
+    "Mission": false
+  },
+  {
+    "Id": 270,
+    "Name": "Diverse",
+    "Rarity": 2,
+    "Categories": ["CUTE", "AWESOME"],
+    "Controversial": false,
+    "Description": "For using a nose, body and tail, all from different sets",
+    "Mission": false
+  },
+  {
+    "Id": 271,
+    "Name": "Minotaur",
+    "Rarity": 2,
+    "Categories": ["WILD", "NERDY"],
+    "Controversial": false,
+    "Description": "For using a mannequin torso, arms and legs and a Dandy Deer head",
+    "Mission": false
+  },
+  {
+    "Id": 272,
+    "Name": "Horny",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY", "WILD"],
+    "Controversial": true,
+    "Description": "For using a Dandy Deer head and a passion firework",
+    "Mission": false
+  },
+  {
+    "Id": 273,
+    "Name": "Hip",
+    "Rarity": 2,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a fidget spinner and a StarTube cap",
+    "Mission": false
+  },
+  {
+    "Id": 274,
+    "Name": "Power-up",
+    "Rarity": 1,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For using a booster and an engine",
+    "Mission": false
+  },
+  {
+    "Id": 275,
+    "Name": "Inflatable",
+    "Rarity": 1,
+    "Categories": ["FUNNY", "CUTE"],
+    "Controversial": false,
+    "Description": "For using a toy part and a pool part",
+    "Mission": false
+  },
+  {
+    "Id": 276,
+    "Name": "Discarded",
+    "Rarity": 1,
+    "Categories": ["CUTE", "GROSS"],
+    "Controversial": false,
+    "Description": "For using a toy part and a trash part",
+    "Mission": false
+  },
+  {
+    "Id": 277,
+    "Name": "Repurpose",
+    "Rarity": 1,
+    "Categories": ["GROSS", "COOL"],
+    "Controversial": false,
+    "Description": "For using a trash part and a scrap part",
+    "Mission": false
+  },
+  {
+    "Id": 278,
+    "Name": "Danger",
+    "Rarity": 1,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using a toy part and a scrap part",
+    "Mission": false
+  },
+  {
+    "Id": 279,
+    "Name": "Jolly",
+    "Rarity": 1,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a toy part and a Dandy Deer part",
+    "Mission": false
+  },
+  {
+    "Id": 280,
+    "Name": "Christmas",
+    "Rarity": 3,
+    "Categories": ["FUNNY", "CUTE"],
+    "Controversial": false,
+    "Description": "For using Dandy Deer and 10 different toy parts",
+    "Mission": false
+  },
+  {
+    "Id": 281,
+    "Name": "Hate",
+    "Rarity": 1,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For using a scrap part and a wood part",
+    "Mission": false
+  },
+  {
+    "Id": 282,
+    "Name": "Timber",
+    "Rarity": 1,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For using a wood part and a mannequin part",
+    "Mission": false
+  },
+  {
+    "Id": 283,
+    "Name": "Search",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY", "WEIRD"],
+    "Controversial": true,
+    "Description": "For using a keyboard and a Dandy Deer part",
+    "Mission": false
+  },
+  {
+    "Id": 284,
+    "Name": "Experience",
+    "Rarity": 1,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a rocket kit part and a NSR part",
+    "Mission": false
+  },
+  {
+    "Id": 285,
+    "Name": "Professional",
+    "Rarity": 2,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For using an engine, a fuel tank, an oxygen tank, a pump and a connector",
+    "Mission": false
+  },
+  {
+    "Id": 286,
+    "Name": "Advanced",
+    "Rarity": 1,
+    "Categories": ["CLEVER", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a NSR part and a kinetic part",
+    "Mission": false
+  },
+  {
+    "Id": 287,
+    "Name": "Body",
+    "Rarity": 1,
+    "Categories": ["CREEPY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For using a mannequin part and a Dandy Deer part",
+    "Mission": false
+  },
+  {
+    "Id": 288,
+    "Name": "Flush",
+    "Rarity": 1,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For using a PVC part and a pool part",
+    "Mission": false
+  },
+  {
+    "Id": 289,
+    "Name": "Abbreviation",
+    "Rarity": 1,
+    "Categories": ["WEIRD", "CLEVER"],
+    "Controversial": false,
+    "Description": "For using a PVC part and a NSR part",
+    "Mission": false
+  },
+  {
+    "Id": 290,
+    "Name": "Clogged",
+    "Rarity": 1,
+    "Categories": ["GROSS", "FUNNY"],
+    "Controversial": false,
+    "Description": "For using a trash part and a PVC part",
+    "Mission": false
+  },
+  {
+    "Id": 291,
+    "Name": "Rot",
+    "Rarity": 1,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For using a trash part and a wood part",
+    "Mission": false
+  },
+  {
+    "Id": 292,
+    "Name": "Custom",
+    "Rarity": 1,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For using a rocket kit part and a PVC part",
+    "Mission": false
+  },
+  {
+    "Id": 293,
+    "Name": "Doll",
+    "Rarity": 1,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For using a toy part and a mannequin part",
+    "Mission": false
+  },
+  {
+    "Id": 294,
+    "Name": "Pipe",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For having a pipe in your rocket",
+    "Mission": false
+  },
+  {
+    "Id": 295,
+    "Name": "Noodle",
+    "Rarity": 1,
+    "Categories": ["CLEVER", "FUNNY"],
+    "Controversial": false,
+    "Description": "For having a pipe of at least 2 meter long",
+    "Mission": false
+  },
+  {
+    "Id": 296,
+    "Name": "Spaghetti",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "FUNNY"],
+    "Controversial": false,
+    "Description": "For having at least than 3 pipes with a length of at least 2 meters",
+    "Mission": false
+  },
+  {
+    "Id": 297,
+    "Name": "I like to connect",
+    "Rarity": 3,
+    "Categories": ["WEIRD"],
+    "Controversial": false,
+    "Description": "For having at least than 10 pipes in your rocket",
+    "Mission": false
+  },
+  {
+    "Id": 298,
+    "Name": "Pumped",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For increasing your fuel rate with a pump",
+    "Mission": false
+  },
+  {
+    "Id": 299,
+    "Name": "Under Pressure",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For having a fuel rate of at least ???",
+    "Mission": false
+  },
+  {
+    "Id": 300,
+    "Name": "Football Pitch",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 91 meters",
+    "Mission": false
+  },
+  {
+    "Id": 301,
+    "Name": "Furlong",
+    "Rarity": 0,
+    "Categories": ["NOOB", "WEIRD"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 201 meters",
+    "Mission": false
+  },
+  {
+    "Id": 302,
+    "Name": "Kilometer",
+    "Rarity": 0,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 1 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 303,
+    "Name": "Sheppey",
+    "Rarity": 1,
+    "Categories": ["WEIRD", "FUNNY"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 1.4 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 304,
+    "Name": "Mile",
+    "Rarity": 1,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 1609 meters",
+    "Mission": false
+  },
+  {
+    "Id": 305,
+    "Name": "League",
+    "Rarity": 1,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 4828 meters",
+    "Mission": false
+  },
+  {
+    "Id": 306,
+    "Name": "Mt. Everest",
+    "Rarity": 2,
+    "Categories": ["ASPIRING", "COOL"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 8848 meters",
+    "Mission": false
+  },
+  {
+    "Id": 307,
+    "Name": "Plane",
+    "Rarity": 2,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 10 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 308,
+    "Name": "Jet Fighter",
+    "Rarity": 2,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 20 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 309,
+    "Name": "Weather Balloon",
+    "Rarity": 2,
+    "Categories": ["ASPIRING", "CLEVER"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 40 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 310,
+    "Name": "Aurora",
+    "Rarity": 3,
+    "Categories": ["ASPIRING", "COOL"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 80 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 311,
+    "Name": "Karman Line",
+    "Rarity": 4,
+    "Categories": ["ASPIRING", "CLEVER"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 100 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 312,
+    "Name": "ISS",
+    "Rarity": 4,
+    "Categories": ["ASPIRING", "CLEVER"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 422 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 313,
+    "Name": "Exosphere",
+    "Rarity": 4,
+    "Categories": ["ASPIRING", "CLEVER", "AWESOME"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 690 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 314,
+    "Name": "Lucky",
+    "Rarity": 2,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 7 meters",
+    "Mission": false
+  },
+  {
+    "Id": 315,
+    "Name": "Bad Luck",
+    "Rarity": 2,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 13 meters",
+    "Mission": false
+  },
+  {
+    "Id": 316,
+    "Name": "Adult",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY"],
+    "Controversial": true,
+    "Description": "For having a top altitude of 18 meters",
+    "Mission": false
+  },
+  {
+    "Id": 317,
+    "Name": "Perv",
+    "Rarity": 3,
+    "Categories": ["NAUGHTY"],
+    "Controversial": true,
+    "Description": "For having a top altitude of 34 meters",
+    "Mission": false
+  },
+  {
+    "Id": 318,
+    "Name": "The Answer",
+    "Rarity": 3,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 42 meters",
+    "Mission": false
+  },
+  {
+    "Id": 319,
+    "Name": "Alien",
+    "Rarity": 3,
+    "Categories": ["NERDY", "CREEPY"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 51 meters",
+    "Mission": false
+  },
+  {
+    "Id": 320,
+    "Name": "Censored",
+    "Rarity": 3,
+    "Categories": ["NAUGHTY"],
+    "Controversial": true,
+    "Description": "For having a top altitude of 69 meters",
+    "Mission": false
+  },
+  {
+    "Id": 321,
+    "Name": "Byte",
+    "Rarity": 3,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 256 meters",
+    "Mission": false
+  },
+  {
+    "Id": 322,
+    "Name": "Pie",
+    "Rarity": 4,
+    "Categories": ["NERDY"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 314 meters",
+    "Mission": false
+  },
+  {
+    "Id": 323,
+    "Name": "Weed",
+    "Rarity": 4,
+    "Categories": ["NAUGHTY"],
+    "Controversial": true,
+    "Description": "For having a top altitude of 420 meters",
+    "Mission": false
+  },
+  {
+    "Id": 324,
+    "Name": "Devil",
+    "Rarity": 4,
+    "Categories": ["CREEPY"],
+    "Controversial": true,
+    "Description": "For having a top altitude of 666 meters",
+    "Mission": false
+  },
+  {
+    "Id": 325,
+    "Name": "Panic",
+    "Rarity": 4,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For having a top altitude of 911 meters",
+    "Mission": false
+  },
+  {
+    "Id": 326,
+    "Name": "Grasshopper",
+    "Rarity": 4,
+    "Categories": ["AWESOME", "WILD"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 25 meters without an engine or explosive",
+    "Mission": false
+  },
+  {
+    "Id": 327,
+    "Name": "Bolt",
+    "Rarity": 2,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For reaching an altitude of 200 meter within 1 second",
+    "Mission": false
+  },
+  {
+    "Id": 328,
+    "Name": "Space Waste",
+    "Rarity": 4,
+    "Categories": ["GROSS", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For using a trash part and reaching an altitude of 100 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 329,
+    "Name": "Stroll",
+    "Rarity": 0,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 10 meter",
+    "Mission": false
+  },
+  {
+    "Id": 330,
+    "Name": "Sprint",
+    "Rarity": 1,
+    "Categories": ["NOOB"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 100 meter",
+    "Mission": false
+  },
+  {
+    "Id": 331,
+    "Name": "Walk",
+    "Rarity": 2,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 1 kilometer",
+    "Mission": false
+  },
+  {
+    "Id": 332,
+    "Name": "Travel",
+    "Rarity": 3,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 10 kilometer",
+    "Mission": false
+  },
+  {
+    "Id": 333,
+    "Name": "Marathon",
+    "Rarity": 3,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 42.2 kilometers",
+    "Mission": false
+  },
+  {
+    "Id": 334,
+    "Name": "Robot",
+    "Rarity": 3,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 5 meters without propulsion or explosives",
+    "Mission": false
+  },
+  {
+    "Id": 335,
+    "Name": "Droid",
+    "Rarity": 4,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For reaching a distance of 25 meters without propulsion or explosives",
+    "Mission": false
+  },
+  {
+    "Id": 336,
+    "Name": "Cheetah",
+    "Rarity": 0,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 120 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 337,
+    "Name": "Falcon",
+    "Rarity": 1,
+    "Categories": ["WILD"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 390 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 338,
+    "Name": "Tupolev",
+    "Rarity": 1,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 870 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 339,
+    "Name": "Sound Barrier",
+    "Rarity": 2,
+    "Categories": ["ASPIRING", "CLEVER"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 1235 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 340,
+    "Name": "Blackbird",
+    "Rarity": 3,
+    "Categories": ["ASPIRING", "WILD"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 3530 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 341,
+    "Name": "Hypersonic",
+    "Rarity": 4,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 7270 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 342,
+    "Name": "HTV-2",
+    "Rarity": 4,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For reaching a speed of 21245 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 343,
+    "Name": "Snail",
+    "Rarity": 2,
+    "Categories": ["WILD", "NOOB"],
+    "Controversial": false,
+    "Description": "For not reaching a speed higher than 10 km/h",
+    "Mission": false
+  },
+  {
+    "Id": 344,
+    "Name": "Looping",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For making a looping",
+    "Mission": false
+  },
+  {
+    "Id": 345,
+    "Name": "Rollercoaster",
+    "Rarity": 2,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For making 3 loopings",
+    "Mission": false
+  },
+  {
+    "Id": 346,
+    "Name": "Corkscrew",
+    "Rarity": 4,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For making 10 loopings",
+    "Mission": false
+  },
+  {
+    "Id": 347,
+    "Name": "Timed",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For triggering a time sensor",
+    "Mission": false
+  },
+  {
+    "Id": 348,
+    "Name": "Right on Time",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For triggering 3 different time sensors",
+    "Mission": false
+  },
+  {
+    "Id": 349,
+    "Name": "Button",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For triggering a button sensor",
+    "Mission": false
+  },
+  {
+    "Id": 350,
+    "Name": "Button Masher",
+    "Rarity": 3,
+    "Categories": ["CLEVER", "NERDY"],
+    "Controversial": false,
+    "Description": "For triggering 5 different button sensors",
+    "Mission": false
+  },
+  {
+    "Id": 351,
+    "Name": "Split",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For triggering a decoupler",
+    "Mission": false
+  },
+  {
+    "Id": 352,
+    "Name": "Steer",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For triggering a swivel",
+    "Mission": false
+  },
+  {
+    "Id": 353,
+    "Name": "In Control",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For spending 5 seconds pressing buttons to control a swivel",
+    "Mission": false
+  },
+  {
+    "Id": 354,
+    "Name": "Explosion",
+    "Rarity": 1,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For triggering an explosion",
+    "Mission": false
+  },
+  {
+    "Id": 355,
+    "Name": "Flash Mob",
+    "Rarity": 2,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For triggering 3 explosions",
+    "Mission": false
+  },
+  {
+    "Id": 356,
+    "Name": "Fire",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY"],
+    "Controversial": false,
+    "Description": "For exploding a Molotov cocktail",
+    "Mission": false
+  },
+  {
+    "Id": 357,
+    "Name": "Clean Land",
+    "Rarity": 3,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For landing a rocket on its tail without exploding",
+    "Mission": false
+  },
+  {
+    "Id": 358,
+    "Name": "Bottle Flip",
+    "Rarity": 4,
+    "Categories": ["AWESOME", "COOL"],
+    "Controversial": false,
+    "Description": "For making a looping and landing a rocket on it\"s tail without exploding",
+    "Mission": false
+  },
+  {
+    "Id": 359,
+    "Name": "Man Overboard",
+    "Rarity": 3,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For having a rocket in the air that consist of only a figure part",
+    "Mission": false
+  },
+  {
+    "Id": 360,
+    "Name": "Swarm",
+    "Rarity": 3,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For having 4 independent rockets in the air at the same time, all with running engines",
+    "Mission": false
+  },
+  {
+    "Id": 361,
+    "Name": "Oops",
+    "Rarity": 1,
+    "Categories": ["NOOB", "FUNNY"],
+    "Controversial": false,
+    "Description": "For hitting a building",
+    "Mission": false
+  },
+  {
+    "Id": 362,
+    "Name": "Casualty",
+    "Rarity": 2,
+    "Categories": ["NAUGHTY", "CREEPY"],
+    "Controversial": true,
+    "Description": "For hitting a building with a rocket with an engine",
+    "Mission": false
+  },
+  {
+    "Id": 363,
+    "Name": "Dumpster",
+    "Rarity": 2,
+    "Categories": ["GROSS"],
+    "Controversial": false,
+    "Description": "For hitting a dumpster",
+    "Mission": false
+  },
+  {
+    "Id": 364,
+    "Name": "Topple",
+    "Rarity": 2,
+    "Categories": ["GROSS", "COOL"],
+    "Controversial": false,
+    "Description": "For knocking something over with your rocket",
+    "Mission": false
+  },
+  {
+    "Id": 365,
+    "Name": "Riot",
+    "Rarity": 2,
+    "Categories": ["CREEPY"],
+    "Controversial": true,
+    "Description": "For exploding a Molotov cocktail against a building",
+    "Mission": false
+  },
+  {
+    "Id": 366,
+    "Name": "Challenge",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For completing a challenge",
+    "Mission": false
+  },
+  {
+    "Id": 367,
+    "Name": "Ridiculous",
+    "Rarity": 4,
+    "Categories": ["AWESOME", "ASPIRING", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating \"Ridiculous Rocket Challenge\"",
+    "Mission": true
+  },
+  {
+    "Id": 368,
+    "Name": "Toy Magic",
+    "Rarity": 3,
+    "Categories": ["CUTE", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating \"Toy Block Tower\"",
+    "Mission": true
+  },
+  {
+    "Id": 369,
+    "Name": "Clown",
+    "Rarity": 3,
+    "Categories": ["CUTE", "CREEPY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating \"Finger Counting For Kids",
+    "Mission": true
+  },
+  {
+    "Id": 370,
+    "Name": "Toilet",
+    "Rarity": 2,
+    "Categories": ["FUNNY", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating \"Toilet Toppler\"",
+    "Mission": true
+  },
+  {
+    "Id": 371,
+    "Name": "Dumpster Dive",
+    "Rarity": 3,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For beating \"Ultimate Dumpster Dive\"",
+    "Mission": true
+  },
+  {
+    "Id": 372,
+    "Name": "Business",
+    "Rarity": 3,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For beating \"With Love From BangCo\"",
+    "Mission": true
+  },
+  {
+    "Id": 373,
+    "Name": "Race",
+    "Rarity": 3,
+    "Categories": ["NAUGHTY"],
+    "Controversial": false,
+    "Description": "For beating \"Wait, that\"s illegal\"",
+    "Mission": true
+  },
+  {
+    "Id": 374,
+    "Name": "Stunt",
+    "Rarity": 3,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For beating \"Stunt Rocket\"",
+    "Mission": true
+  },
+  {
+    "Id": 375,
+    "Name": "Monster",
+    "Rarity": 4,
+    "Categories": ["CREEPY", "AWESOME"],
+    "Controversial": false,
+    "Description": "For beating \"Looping Monster\"",
+    "Mission": true
+  },
+  {
+    "Id": 376,
+    "Name": "Connector",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating \"Do a Split\"",
+    "Mission": true
+  },
+  {
+    "Id": 377,
+    "Name": "Robotical",
+    "Rarity": 3,
+    "Categories": ["CLEVER", "COOL"],
+    "Controversial": false,
+    "Description": "For beating \"Robotical\"",
+    "Mission": true
+  },
+  {
+    "Id": 378,
+    "Name": "Cluster",
+    "Rarity": 3,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating \"I heard you like rockets in your rocket\"",
+    "Mission": true
+  },
+  {
+    "Id": 379,
+    "Name": "Angel",
+    "Rarity": 2,
+    "Categories": ["WEIRD", "FUNNY"],
+    "Controversial": false,
+    "Description": "For beating \"Bike Angel\"",
+    "Mission": true
+  },
+  {
+    "Id": 380,
+    "Name": "Planking",
+    "Rarity": 2,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For beating \"Planking\"",
+    "Mission": true
+  },
+  {
+    "Id": 381,
+    "Name": "Grand",
+    "Rarity": 4,
+    "Categories": ["COOL", "AWESOME"],
+    "Controversial": false,
+    "Description": "For beating \"Grand Scrap\"",
+    "Mission": true
+  },
+  {
+    "Id": 382,
+    "Name": "Eco",
+    "Rarity": 4,
+    "Categories": ["WILD", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating \"Algae Fuel Test\"",
+    "Mission": true
+  },
+  {
+    "Id": 383,
+    "Name": "Scary",
+    "Rarity": 3,
+    "Categories": ["CREEPY"],
+    "Controversial": false,
+    "Description": "For beating \"Furrankenstein\"",
+    "Mission": true
+  },
+  {
+    "Id": 384,
+    "Name": "Cool",
+    "Rarity": 3,
+    "Categories": ["COOL"],
+    "Controversial": false,
+    "Description": "For beating \"Too Cool For Pool\"",
+    "Mission": true
+  },
+  {
+    "Id": 385,
+    "Name": "Oxidizer",
+    "Rarity": 2,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating \"Optimizing\"",
+    "Mission": true
+  },
+  {
+    "Id": 386,
+    "Name": "Mozambique",
+    "Rarity": 3,
+    "Categories": ["CLEVER", "ASPIRING"],
+    "Controversial": false,
+    "Description": "For beating \"The Perfect Pump\"",
+    "Mission": true
+  },
+  {
+    "Id": 387,
+    "Name": "Staged",
+    "Rarity": 3,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating \"Engine Swap\"",
+    "Mission": true
+  },
+  {
+    "Id": 388,
+    "Name": "Striptease",
+    "Rarity": 4,
+    "Categories": ["NAUGHTY"],
+    "Controversial": false,
+    "Description": "For beating \"Rocket Strip Tease\"",
+    "Mission": true
+  },
+  {
+    "Id": 389,
+    "Name": "Hover Cat",
+    "Rarity": 3,
+    "Categories": ["FUNNY"],
+    "Controversial": false,
+    "Description": "For beating \"Hover Cat\"",
+    "Mission": true
+  },
+  {
+    "Id": 390,
+    "Name": "BOOOM",
+    "Rarity": 3,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For beating \"Next Level\"",
+    "Mission": true
+  },
+  {
+    "Id": 391,
+    "Name": "Sizzle",
+    "Rarity": 4,
+    "Categories": ["AWESOME"],
+    "Controversial": false,
+    "Description": "For beating \"Dynamite Launch\"",
+    "Mission": true
+  },
+  {
+    "Id": 392,
+    "Name": "Child",
+    "Rarity": 0,
+    "Categories": ["CUTE"],
+    "Controversial": false,
+    "Description": "For beating a challenge from SidPhillips",
+    "Mission": true
+  },
+  {
+    "Id": 393,
+    "Name": "BangCo",
+    "Rarity": 1,
+    "Categories": ["ASPIRING"],
+    "Controversial": false,
+    "Description": "For beating a challenge from BangCo",
+    "Mission": true
+  },
+  {
+    "Id": 394,
+    "Name": "Fanboy",
+    "Rarity": 1,
+    "Categories": ["COOL", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating a challenge from ChannelTips",
+    "Mission": true
+  },
+  {
+    "Id": 395,
+    "Name": "RocketGirl",
+    "Rarity": 1,
+    "Categories": ["COOL", "AWESOME"],
+    "Controversial": false,
+    "Description": "For beating a challenge from RocketGirl",
+    "Mission": true
+  },
+  {
+    "Id": 396,
+    "Name": "RaySon",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating a challenge from RaySon",
+    "Mission": true
+  },
+  {
+    "Id": 397,
+    "Name": "Shop",
+    "Rarity": 0,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating a challenge from DIY Shop",
+    "Mission": true
+  },
+  {
+    "Id": 398,
+    "Name": "Science",
+    "Rarity": 1,
+    "Categories": ["CLEVER"],
+    "Controversial": false,
+    "Description": "For beating a challenge from dot_science",
+    "Mission": true
+  },
+  {
+    "Id": 399,
+    "Name": "Family",
+    "Rarity": 2,
+    "Categories": ["COOL", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating a challenge from ScrapDad",
+    "Mission": true
+  },
+  {
+    "Id": 400,
+    "Name": "Progress",
+    "Rarity": 2,
+    "Categories": ["WILD", "WEIRD"],
+    "Controversial": false,
+    "Description": "For beating a challenge from RoseWood",
+    "Mission": true
+  }
+]
