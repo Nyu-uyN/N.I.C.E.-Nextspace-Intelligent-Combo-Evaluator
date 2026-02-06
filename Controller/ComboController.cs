@@ -17,6 +17,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
         public int ComboSize { get; set; } = 5;
         public int MaxResults { get; set; } = int.MaxValue;
         public bool AbortRequested { get; set; } = false;
+        public int ComboSizeMax { get; set; } = 5;
+        private const int MaxTopDisjoint = 10;
 
         public ComboController(IEnumerable<Tag> tags, int comboSize = 5, int maxResults = int.MaxValue)
         {
@@ -31,7 +33,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
             MaxResults = maxResults;
         }
 
-        public List<Combo> GenerateTopCombos()
+       /* public List<Combo> GenerateTopCombos()
         {
             // Min-heap based on score, smallest score has highest priority
             var topCombos = new PriorityQueue<Combo, int>();
@@ -125,19 +127,116 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
             {
                 totalMultiplier *= count switch
                 {
-                    0 => 1f,
-                    1 => 1f,
+                    
                     2 => 2f,
                     3 => 5f,
                     4 => 15f,
                     5 => 30f,
-                    _ => 30f // ne peut pas dépasser 5 tags par combo
+                    _ => 1f // ne peut pas dépasser 5 tags par combo
                 };
             }
 
             // 4️⃣ Score final
             return (int)Math.Round(baseSubs * totalMultiplier);
         }
+        /// <summary>
+        /// Génère le top 10 de combos disjoints exacts à la volée.
+        /// </summary>
+        public List<Combo> GetTop10DisjointExact(List<Tag> tags)
+        {
+            // 1️⃣ Tri initial des tags
+            var categoryCounts = tags.SelectMany(t => t.Categories)
+                                     .GroupBy(c => c)
+                                     .ToDictionary(g => g.Key, g => g.Count());
+
+            var sortedTags = tags
+                .OrderByDescending(t => t.Categories.Max(c => categoryCounts[c])) // catégories les plus représentées
+                .ThenByDescending(t => t.Categories.Length)                        // tags avec plusieurs catégories
+                .ThenByDescending(t => t.Categories.Sum(c => categoryCounts[c]))  // représ. catégories supplémentaires
+                .ThenByDescending(t => t.Rarity)                                   // rareté
+                .ToList();
+
+            var bestSolution = new List<Combo>();
+            int bestScore = 0;
+
+            // 2️⃣ Backtracking exact
+            void Backtrack(int index, List<Combo> currentSolution, HashSet<int> usedTags, int currentScore)
+            {
+                if (AbortRequested) return;
+
+                // Si on a atteint max combos ou plus de tags à explorer
+                if (currentSolution.Count == MaxTopDisjoint || index == sortedTags.Count)
+                {
+                    if (currentScore > bestScore)
+                    {
+                        bestScore = currentScore;
+                        bestSolution = new List<Combo>(currentSolution);
+                    }
+                    return;
+                }
+
+                // Générer toutes les combinaisons possibles à partir du tag courant
+                for (int comboSize = 2; comboSize <= ComboSizeMax; comboSize++)
+                {
+                    GenerateCombosRecursive(sortedTags, comboSize, index, new List<Tag>(), currentSolution, usedTags, currentScore);
+                }
+            }
+
+            void GenerateCombosRecursive(
+                List<Tag> availableTags,
+                int comboSize,
+                int startIndex,
+                List<Tag> currentCombo,
+                List<Combo> currentSolution,
+                HashSet<int> usedTags,
+                int currentScore)
+            {
+                if (AbortRequested) return;
+
+                if (currentCombo.Count == comboSize)
+                {
+                    // Vérifier que le combo est disjoint avec les tags déjà utilisés
+                    if (currentCombo.Any(t => usedTags.Contains(t.Id))) return;
+
+                    int score = CalculateScore(currentCombo);
+                    var combo = new Combo(currentCombo, score);
+
+                    // Ajouter les tags au set utilisé
+                    foreach (var t in currentCombo)
+                        usedTags.Add(t.Id);
+
+                    currentSolution.Add(combo);
+
+                    // Recurse
+                    Backtrack(0, currentSolution, usedTags, currentScore + score);
+
+                    // Clean-up
+                    currentSolution.RemoveAt(currentSolution.Count - 1);
+                    foreach (var t in currentCombo)
+                        usedTags.Remove(t.Id);
+
+                    return;
+                }
+
+                for (int i = startIndex; i < availableTags.Count; i++)
+                {
+                    var candidate = availableTags[i];
+
+                    // Incompatibilités au sein du combo
+                    if (currentCombo.Any(t => t.IncompatibleTagIds.Contains(candidate.Id))) continue;
+
+                    currentCombo.Add(candidate);
+                    GenerateCombosRecursive(availableTags, comboSize, i + 1, currentCombo, currentSolution, usedTags, currentScore);
+                    currentCombo.RemoveAt(currentCombo.Count - 1);
+
+                    if (AbortRequested) return;
+                }
+            }
+
+            Backtrack(0, new List<Combo>(), new HashSet<int>(), 0);
+
+            return bestSolution;
+        }*/
     }
 }
 

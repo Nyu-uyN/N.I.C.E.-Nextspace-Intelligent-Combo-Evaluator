@@ -1,4 +1,8 @@
-﻿using System.Text;
+﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller;
+using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model;
+using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
+using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -18,7 +22,11 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator
     {
         public MainWindow()
         {
+            
             InitializeComponent();
+            TagFactory.MaxPotentialScoreComputer.ComputeAndPersist();
         }
+        
+        
     }
 }
