@@ -11,7 +11,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
     {
         public ulong A, B, C, D, E, F, G;
 
-        public static readonly TagMask Empty = new TagMask();
+        public static readonly TagMask Empty = new();
 
         // Set a bit at a given index (0..400)
         public void SetBit(int index)

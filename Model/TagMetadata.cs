@@ -1,4 +1,5 @@
-﻿using System;
+﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,5 +24,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             if (isControversial) ControversialMask.SetBit(index);
             if (isStoryMission) StoryMissionMask.SetBit(index);
         }
+        
     }
+
 }

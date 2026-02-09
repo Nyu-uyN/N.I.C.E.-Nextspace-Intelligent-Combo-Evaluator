@@ -2,83 +2,89 @@
 using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
-
-public struct CandidateCombo
+namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 {
-    public TagMask UsedTagsMask;
-    public TagMask CumulativeIncompatibilityMask;
-    public int BaseSubs; // somme des subs des tags
-    public CategoryMask CategoriesMask; // cumul des catégories
 
-    // Tableau de comptage par catégorie (index = Category enum)
-    private short[] _categoryCounts;
-
-    public CandidateCombo()
+    public struct CandidateCombo
     {
-        UsedTagsMask = TagMask.Empty;
-        CumulativeIncompatibilityMask = TagMask.Empty;
-        BaseSubs = 0;
-        CategoriesMask = CategoryMask.Empty;
-        _categoryCounts = new short[13]; // 13 catégories fixes
-    }
+       
+        // --- Stockage Optimisé ---
+        // Remplace short[] _categoryCounts.
+        // Stocke 13 compteurs de 4 bits chacun dans un seul ulong (13 * 4 = 52 bits < 64).
+        public ulong PackedCategoryCounts;
 
-    /// <summary>
-    /// Ajoute un tag à ce combo et met à jour toutes les infos O(bits actifs)
-    /// </summary>
-    public void AddTag(Tag tag)
-    {
-        UsedTagsMask.SetBit(tag.Index);
-        CumulativeIncompatibilityMask.Or(tag.IncompatibilityMask);
-        BaseSubs += tag.BaseSubs;
-        CategoriesMask.Or(tag.CategoryMask);
+        public TagMask CumulativeIncompatibilityMask;
+        public int BaseSubs;
+        public int Size;
 
-        // Met à jour les compteurs de catégories seulement pour les bits actifs
-        ushort bits = tag.CategoryMask.Mask; // expose un getter ushort pour le champ _mask
-        while (bits != 0)
+        // Table de multiplication (statique pour éviter de la recréer)
+        private static readonly float[] Multipliers = { 1f, 1f, 2f, 5f, 15f, 30f, 30f, 30f };
+
+        // Initialisation (plus besoin de 'new short[]')
+        public void Reset()
         {
-            int bitIndex = BitOperations.TrailingZeroCount(bits);
-            _categoryCounts[bitIndex]++;
-            bits &= (ushort)~(1 << bitIndex); // on supprime le bit traité
-        }
-    }
-
-    /// <summary>
-    /// Test rapide si un tag peut être ajouté
-    /// </summary>
-    public bool CanAdd(Tag tag)
-    {
-        return !UsedTagsMask.IsSet(tag.Index) &&
-               !CumulativeIncompatibilityMask.IsSet(tag.Index);
-    }
-
-    /// <summary>
-    /// Calcul du score en O(nombre de bits actifs)
-    /// </summary>
-    public int ComputeScore()
-    {
-        float totalMultiplier = 1f;
-
-        // Parcourt uniquement les catégories présentes dans le combo
-        ushort bits = CategoriesMask.Mask;
-        while (bits != 0)
-        {
-            int bitIndex = BitOperations.TrailingZeroCount(bits);
-            int count = _categoryCounts[bitIndex];
-
-            totalMultiplier *= count switch
-            {
-                2 => 2f,
-                3 => 5f,
-                4 => 15f,
-                5 => 30f,
-                _ => 1f
-            };
-
-            bits &= (ushort)~(1 << bitIndex);
+            PackedCategoryCounts = 0;
+            CumulativeIncompatibilityMask = TagMask.Empty;
+            BaseSubs = 0;
+            Size = 0;
         }
 
-        return (int)Math.Round(BaseSubs * totalMultiplier);
+        // Ajout ultra-rapide
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void AddTag(Tag tag)
+        {
+            // 1. Addition atomique des catégories (magie du bit-packing)
+            PackedCategoryCounts += tag.CategoryAdder;
+
+            // 2. Mise à jour classique
+            CumulativeIncompatibilityMask.Or(tag.IncompatibilityMask);
+            BaseSubs += tag.BaseSubs;
+            Size++;
+        }
+
+        // Calcul du score exact à l'instant T
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public int ComputeScore()
+        {
+            float multiplier = GetCurrentMultiplier();
+            return (int)(BaseSubs * multiplier);
+        }
+
+        // Helper pour extraire le multiplicateur du ulong
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public float GetCurrentMultiplier()
+        {
+            float mult = 1f;
+            ulong temp = PackedCategoryCounts;
+
+            // On déroule la boucle pour 13 catégories (performance critique)
+            // (temp & 0xF) récupère la valeur des 4 derniers bits (le compteur de la cat courante)
+
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 0
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 1
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 2
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 3
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 4
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 5
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 6
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 7
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 8
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 9
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 10
+            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 11
+            mult *= Multipliers[temp & 0xF];             // Cat 12
+
+            return mult;
+        }
+
+        // Vérification de compatibilité
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool CanAdd(Tag tag)
+        {
+            return !CumulativeIncompatibilityMask.IsSet(tag.Index);
+        }
     }
 }
 

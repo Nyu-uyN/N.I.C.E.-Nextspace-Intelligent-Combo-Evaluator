@@ -12,7 +12,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
     {
         private ushort _mask; // 16 bits suffisent pour 13 catégories
 
-        public static readonly CategoryMask Empty = new CategoryMask();
+        public static readonly CategoryMask Empty = new();
 
         public ushort Mask { get => _mask; set => _mask = value; }
 

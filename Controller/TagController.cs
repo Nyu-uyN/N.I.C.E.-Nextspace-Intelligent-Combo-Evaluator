@@ -14,15 +14,30 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
     {
         private static readonly List<Tag> _tags;
         private static readonly Tag[] _tagsByIndex;
+        private static readonly Tag[] _tagsByMaxPotentialScoreDesc;
 
+        public static readonly TagMask AllTagsMask;
         static TagController()
         {
             _tags = TagFactory.BuildTags();
 
             int maxIndex = _tags.Count;
             _tagsByIndex = new Tag[maxIndex];
+
+            var allMask = TagMask.Empty;
+
             foreach (var tag in _tags)
+            {
                 _tagsByIndex[tag.Index] = tag;
+                allMask.SetBit(tag.Index);
+            }
+
+            AllTagsMask = allMask;
+
+            // Single global sort by MaxPotentialScore (descending)
+            _tagsByMaxPotentialScoreDesc = _tags
+                .OrderByDescending(t => t.MaxPotentialScore)
+                .ToArray();
         }
 
         public static IReadOnlyList<Tag> Tags => _tags;
@@ -36,7 +51,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
                 mask.SetBit(idx);
             return mask;
         }
-
+        public static Tag[] AllTagsByMaxPotentialScoreDesc
+            => _tagsByMaxPotentialScoreDesc;
         public static TagMask GetMaskFromTags(IEnumerable<Tag> tags)
         {
             var mask = TagMask.Empty;
