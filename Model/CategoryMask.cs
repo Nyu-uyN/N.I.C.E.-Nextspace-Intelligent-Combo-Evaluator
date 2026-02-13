@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
@@ -38,15 +39,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 
         public int CountBits()
         {
-            // Hamming weight rapide pour 16 bits
-            ushort m = Mask;
-            int count = 0;
-            while (m != 0)
-            {
-                count++;
-                m &= (ushort)(m - 1);
-            }
-            return count;
+            return BitOperations.PopCount(Mask);
         }
     }
 }

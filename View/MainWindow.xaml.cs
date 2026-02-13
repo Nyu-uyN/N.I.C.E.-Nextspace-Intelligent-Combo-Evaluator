@@ -1,19 +1,8 @@
-﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller;
-using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model;
-using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
+﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.View;
 using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel;
-using System.Diagnostics;
-using System.IO;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator
 {
@@ -25,33 +14,63 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator
         public MainWindow()
         {
             InitializeComponent();
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            List<Combo> combos = ComboController.ComputeBestLoadout_Parallel(TagController.Tags);
-            sw.Stop();
-            string tempsFormate = sw.Elapsed.ToString(@"hh\:mm\:ss\.fff");
-            using (var writer = new StreamWriter("ttdcombos.txt", append: false, encoding: Encoding.UTF8))
+
+            var vm = new MainViewModel();
+            this.DataContext = vm;
+
+            // Subscribe to the event to open the separate Results Window
+            vm.OnCalculationCompleted += (package) =>
             {
-                writer.WriteLine($"Rapport généré le : {DateTime.Now} - Temps de calcul: {tempsFormate}");
-                writer.WriteLine("========================================");
-                writer.WriteLine();
-
-                int rank = 1;
-                foreach (var combo in combos)
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-                    // En-tête de rang (ex: #1, #2...)
-                    writer.WriteLine($"################# RANG {rank} #################");
-
-                    // Utilise ta méthode ToString() détaillée
-                    writer.WriteLine(combo.ToString());
-
-                    // Espace entre les combos pour la lisibilité
-                    writer.WriteLine();
-
-                    rank++;
+                    
+                    var resultWindow = new ResultsWindow(package);
+                    resultWindow.Owner = this;
+                    resultWindow.Show();
+                });
+            };
+        }
+        /// <summary>
+        /// Validates text input to ensure only numeric characters are accepted.
+        /// Utilizes a regular expression to match non-digit characters and marks the event as handled if found.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The TextCompositionEventArgs containing the input text.</param>
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            // Regex "[^0-9]+" matches any character that is NOT a digit between 0 and 9.
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        /// <summary>
+        /// Validates pasted content. If the content contains non-numeric characters, the paste operation is canceled.
+        /// </summary>
+        /// <param name="sender">The object where the command is being executed.</param>
+        /// <param name="e">The DataObjectPastingEventArgs containing the data to be pasted.</param>
+        private void OnPaste(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(DataFormats.Text))
+            {
+                string text = (string)e.DataObject.GetData(DataFormats.Text);
+                if (!IsTextAllowed(text))
+                {
+                    e.CancelCommand();
                 }
+            }
+            else
+            {
+                e.CancelCommand();
             }
         }
 
-
+        /// <summary>
+        /// Helper method to verify if a string consists strictly of numeric digits.
+        /// </summary>
+        /// <param name="text">The string to validate.</param>
+        /// <returns>True if the string is numeric; otherwise, false.</returns>
+        private static bool IsTextAllowed(string text)
+        {
+            return Regex.IsMatch(text, "^[0-9]*$");
+        }
     }
 }

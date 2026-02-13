@@ -1,52 +1,68 @@
-﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Numerics;
 
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 {
     /// <summary>
-    /// Optimized Tag for N.I.C.E.
-    /// Stores precomputed masks and base subs for fast combo evaluation.
+    /// Represents an immutable, computation-ready tag.
+    /// Designed for high-performance evaluation within the solver.
     /// </summary>
-    public readonly struct Tag
+    public readonly struct Tag : IEquatable<Tag>
     {
         public int Index { get; }
         public int BaseSubs { get; }
         public TagMask IncompatibilityMask { get; }
         public CategoryMask CategoryMask { get; }
-        public long MaxPotentialScore { get; }
-        // --- OPTIMISATION : Champ ajouté ---
-        // Représente les compteurs sous forme packée (4 bits par catégorie).
-        // Permet d'ajouter les catégories au combo via une simple addition d'entiers.
+        public int MaxPotentialScore { get; }
+
+        /// <summary>
+        /// A packed 64-bit integer where each 4-bit slot represents a category counter.
+        /// Allows incrementing all category counts in a combo using a single integer addition.
+        /// </summary>
+        /// 
         public ulong CategoryAdder { get; }
-        // Constructor
+
+        /// <summary>
+        /// Initializes a new instance of the Tag struct and precomputes the CategoryAdder.
+        /// </summary>
         public Tag(
             int index,
             int baseSubs,
             TagMask incompatibilityMask,
             CategoryMask categoryMask,
-            long maxPotentialScore)
+            int maxPotentialScore)
         {
             Index = index;
             BaseSubs = baseSubs;
             IncompatibilityMask = incompatibilityMask;
             CategoryMask = categoryMask;
             MaxPotentialScore = maxPotentialScore;
-            CategoryAdder = 0;
+
+            // Precompute the packed category adder
+            ulong adder = 0;
             ushort bits = categoryMask.Mask;
-            int bitIndex = 0;
+
             while (bits != 0)
             {
-                if ((bits & 1) != 0)
-                {
-                    // On met le bit à 1 dans le slot de 4 bits correspondant à la catégorie
-                    CategoryAdder |= 1UL << (bitIndex * 4);
-                }
-                bits >>= 1;
-                bitIndex++;
+                int bitIndex = BitOperations.TrailingZeroCount(bits);
+                adder |= 1UL << (bitIndex * 4);
+                bits &= (ushort)~(1 << bitIndex);
             }
+
+            CategoryAdder = adder;
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Equals(Tag other) => Index == other.Index;
+
+        public override bool Equals(object? obj) => obj is Tag other && Equals(other);
+
+        public override int GetHashCode() => Index;
+
+        public static bool operator ==(Tag left, Tag right) => left.Equals(right);
+
+        public static bool operator !=(Tag left, Tag right) => !left.Equals(right);
     }
 }
 

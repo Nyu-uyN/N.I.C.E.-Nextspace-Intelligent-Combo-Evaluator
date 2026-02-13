@@ -1,36 +1,41 @@
-﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
+﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model;
+using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using System.Linq;
 using System.Text.Json;
-using System.Windows;
 
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 {
+    /// <summary>
+    /// Responsible for loading, merging, and constructing Tag objects from JSON sources.
+    /// Supports a layered data approach (Core data + User overrides).
+    /// </summary>
     public static class TagFactory
     {
-        // Chemin vers le JSON fusionné
-        private const string TagsJsonFile = "tags.json";
+        private const string CoreJsonFile = "tags.json";
+        private const string UserJsonFile = "user_overrides.json";
 
         /// <summary>
-        /// Construit tous les Tags optimisés pour NICE.
-        /// Appelle automatiquement la désérialisation interne.
+        /// Orchestrates the full loading process: merging JSON files, initializing metadata,
+        /// and generating optimized Tag objects for the solver.
         /// </summary>
+        /// <returns>A list of merged and initialized Tag objects.</returns>
         public static List<Tag> BuildTags()
         {
-            var rawTags = GetRawTagsFromJson();
-            
+            var finalRawTags = GetMergedRawTags();
 
-            var tags = new List<Tag>(rawTags.Count);
+            TagMetadata.Reset();
 
-            foreach (var raw in rawTags)
+            var tags = new List<Tag>(finalRawTags.Count);
+
+            foreach (var raw in finalRawTags)
             {
                 var incompatibilityMask = BuildIncompatibilityMask(raw.IncompatibleIds);
                 var categoryMask = BuildCategoryMask(raw.Categories);
                 int baseSubs = ComputeBaseSubs(raw.Rarity);
 
-                // Stockage metadata
                 TagMetadata.Add(raw.Id, raw.Name, raw.Description, raw.IsControversial, raw.IsStoryMission);
 
                 tags.Add(new Tag(
@@ -45,35 +50,60 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             return tags;
         }
 
-        // ------------------------------
-        // helpers privés
-        // ------------------------------
-
-        public static List<RawTag> GetRawTagsFromJson()
+        /// <summary>
+        /// Merges the read-only core data with the writable user overrides.
+        /// Overrides replace core data based on Tag ID.
+        /// </summary>
+        private static List<RawTag> GetMergedRawTags()
         {
-            var json = File.ReadAllText(TagsJsonFile);
-            return JsonSerializer.Deserialize<List<RawTag>>(json)
-                   ?? throw new InvalidOperationException("Impossible de désérialiser le JSON en RawTag");
+            if (!File.Exists(CoreJsonFile))
+                throw new FileNotFoundException($"Core data file {CoreJsonFile} is missing.");
+
+            var coreJson = File.ReadAllText(CoreJsonFile);
+            var coreTags = JsonSerializer.Deserialize<List<RawTag>>(coreJson) ?? new();
+
+            if (!File.Exists(UserJsonFile))
+                return coreTags;
+
+            var userJson = File.ReadAllText(UserJsonFile);
+            var userOverrides = JsonSerializer.Deserialize<List<RawTag>>(userJson) ?? new();
+
+            var mergeMap = coreTags.ToDictionary(t => t.Id);
+
+            foreach (var over in userOverrides)
+            {
+                mergeMap[over.Id] = over;
+            }
+
+            return mergeMap.Values.OrderBy(t => t.Id).ToList();
         }
-        public static void WriteRawTagsToJson(List<RawTag> rawTags)
-                => File.WriteAllText(
-                    "tags+.json",
-                    JsonSerializer.Serialize(rawTags, new JsonSerializerOptions { WriteIndented = true })
-                );
+
+        /// <summary>
+        /// Persists user-defined modifications to the override JSON file.
+        /// </summary>
+        public static void WriteUserOverrides(List<RawTag> userOverrides)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            var json = JsonSerializer.Serialize(userOverrides, options);
+            File.WriteAllText(UserJsonFile, json);
+        }
 
         private static TagMask BuildIncompatibilityMask(int[] incompatibleIds)
         {
             var mask = TagMask.Empty;
+            if (incompatibleIds == null) return mask;
+
             foreach (var id in incompatibleIds)
-            { 
-               mask.SetBit(id);
-            }
+                mask.SetBit(id);
+
             return mask;
         }
 
         private static CategoryMask BuildCategoryMask(string[] categories)
         {
             var mask = CategoryMask.Empty;
+            if (categories == null) return mask;
+
             foreach (var cat in categories)
             {
                 if (Enum.TryParse<Category>(cat, ignoreCase: true, out var category))
@@ -91,33 +121,11 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             4 => 405,
             _ => 0
         };
-
-        
-        
-
-            // -------- helpers JSON / construction --------
-
-            private static List<Tag> BuildTagsFromRaw(List<RawTag> rawTags)
-            {
-                var tags = new List<Tag>(rawTags.Count);
-                foreach (var raw in rawTags)
-                {
-                    tags.Add(new Tag(
-                        index: raw.Id,
-                      
-                        
-                        baseSubs: ComputeBaseSubs(raw.Rarity),
-                        incompatibilityMask: BuildIncompatibilityMask(raw.IncompatibleIds),
-                        categoryMask: BuildCategoryMask(raw.Categories),0
-                        
-                    ));
-                }
-                return tags;
-            }
-
-            
-
-            
-        
     }
 }
+            
+
+            
+        
+   
+

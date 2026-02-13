@@ -1,110 +1,86 @@
-﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Numerics;
+using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums;
 
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 {
     /// <summary>
-    /// Represents a combo of tags and its associated score.
-    /// Immutable and JSON-friendly.
+    /// Represents a final, immutable combination of tags with its calculated score.
+    /// Provides advanced formatting for text-based export and logging.
     /// </summary>
     public sealed class Combo
     {
-        /// <summary>
-        /// tags that compose this combo.
-        /// </summary>
-        public IReadOnlyList<Tag> Tags { get; init; }
+        private static readonly float[] MultiplierTable = { 1f, 1f, 2f, 5f, 15f, 30f, 30f };
 
-        /// <summary>
-        /// Score of the combo.
-        /// Higher is better.
-        /// </summary>
+        public IReadOnlyList<Tag> Tags { get; init; }
         public int Score { get; init; }
 
         public Combo(IEnumerable<Tag> tags, int score)
         {
-            if (tags is null)
-                throw new ArgumentNullException(nameof(tags));
-
-            Tags = new List<Tag>(tags).AsReadOnly();
+            Tags = tags?.ToList().AsReadOnly() ?? throw new ArgumentNullException(nameof(tags));
             Score = score;
         }
+
+        /// <summary>
+        /// Generates a detailed report of the combo, including base stats, 
+        /// individual tags, and category synergy breakdowns.
+        /// </summary>
         public override string ToString()
         {
             var sb = new StringBuilder();
-
-            // 1. Calculs préliminaires pour l'affichage
             int totalBaseSubs = 0;
-            int[] categoryCounts = new int[13]; // 13 catégories dans l'Enum
+            ulong combinedCategories = 0;
 
+            // Aggregate data using precomputed tag properties
             foreach (var tag in Tags)
             {
                 totalBaseSubs += tag.BaseSubs;
-
-                // On décode le masque de catégorie pour compter
-                ushort mask = tag.CategoryMask.Mask;
-                int catIndex = 0;
-                while (mask != 0)
-                {
-                    if ((mask & 1) != 0)
-                    {
-                        categoryCounts[catIndex]++;
-                    }
-                    mask >>= 1;
-                    catIndex++;
-                }
+                combinedCategories += tag.CategoryAdder;
             }
 
-            // Calcul du multiplicateur global réel
-            float totalMultiplier = totalBaseSubs > 0 ? (float)Score / totalBaseSubs : 0f;
+            float globalMultiplier = totalBaseSubs > 0 ? (float)Score / totalBaseSubs : 0f;
 
-            // --- EN-TÊTE ---
+            // --- HEADER ---
             sb.AppendLine($"=== COMBO SCORE: {Score:N0} ===");
-            sb.AppendLine($"Base Subs: {totalBaseSubs} | Multiplicateur Global: x{totalMultiplier:0.00}");
+            sb.AppendLine($"Base Subs: {totalBaseSubs} | Global Multiplier: x{globalMultiplier:F2}");
             sb.AppendLine(new string('-', 40));
 
-            // --- LISTE DES TAGS ---
-            sb.AppendLine("Tags utilisés :");
+            // --- TAG LIST ---
+            sb.AppendLine("Tags used:");
             foreach (var tag in Tags)
             {
-                // Récupération du nom via TagMetadata
-                string tagName = TagMetadata.Names.TryGetValue(tag.Index, out var name)
-                    ? name
-                    : $"UnknownTag_{tag.Index}";
+                if (!TagMetadata.Names.TryGetValue(tag.Index, out var tagName))
+                    tagName = $"UnknownTag_{tag.Index}";
 
-                sb.AppendLine($" - [{tag.Index}] {tagName,-20} (Subs: {tag.BaseSubs})");
+                sb.AppendLine($" - [{tag.Index:D3}] {tagName,-20} (Base: {tag.BaseSubs})");
             }
             sb.AppendLine(new string('-', 40));
 
-            // --- DÉTAIL DES CATÉGORIES (SYNERGIES) ---
-            sb.AppendLine("Synergies (Catégories) :");
-
+            // --- SYNERGIES ---
+            sb.AppendLine("Synergies (Categories):");
             bool hasSynergy = false;
-            // Table de correspondance pour l'affichage (reprise de ta logique)
-            float[] multTable = { 1f, 1f, 2f, 5f, 15f, 30f, 30f };
 
-            for (int i = 0; i < categoryCounts.Length; i++)
+            // Extract category counts from the packed ulong (4 bits per category)
+            for (int i = 0; i < 13; i++)
             {
-                int count = categoryCounts[i];
-                if (count > 0)
-                {
-                    hasSynergy = true;
-                    var categoryName = (Category)i;
-                    float currentMult = (count < multTable.Length) ? multTable[count] : 30f;
+                int count = (int)((combinedCategories >> (i * 4)) & 0xF);
+                if (count <= 0) continue;
 
-                    // Formatage : Nom catégorie, jauge visuelle, compte et bonus
-                    string bonusDisplay = currentMult > 1f ? $" -> Multiplicateur x{currentMult}" : " (Pas de bonus)";
-                    string visualGauge = new string('■', count).PadRight(5, '·'); // Ex: ■■■··
+                hasSynergy = true;
+                var categoryName = (Category)i;
+                float currentMult = (count < MultiplierTable.Length) ? MultiplierTable[count] : MultiplierTable[^1];
 
-                    sb.AppendLine($" {visualGauge} {categoryName,-10} : {count} tags{bonusDisplay}");
-                }
+                string bonusDisplay = currentMult > 1f ? $" -> Multiplier x{currentMult}" : " (No bonus)";
+                string visualGauge = new string('■', count).PadRight(5, '·');
+
+                sb.AppendLine($" {visualGauge} {categoryName,-12} : {count} tags{bonusDisplay}");
             }
 
             if (!hasSynergy)
-            {
-                sb.AppendLine(" Aucune catégorie active.");
-            }
+                sb.AppendLine(" No active categories.");
 
             return sb.ToString();
         }

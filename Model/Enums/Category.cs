@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model.Enums
+/// <summary>
+/// Defines the available content categories. 
+/// These are used to calculate synergy multipliers during combo evaluation.
+/// </summary>
+public enum Category
 {
-    public enum Category
-    {
-        Cool,
-        Weird,
-        Clever,
-        Funny,
-        Awesome,
-        Creepy,
-        Cute,
-        Noob,
-        Gross,
-        Naughty,
-        Wild,
-        Aspiring,
-        Nerdy
-    }
+    Cool = 0,
+    Weird = 1,
+    Clever = 2,
+    Funny = 3,
+    Awesome = 4,
+    Creepy = 5,
+    Cute = 6,
+    Noob = 7,
+    Gross = 8,
+    Naughty = 9,
+    Wild = 10,
+    Aspiring = 11,
+    Nerdy = 12
 }
+

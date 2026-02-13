@@ -1,28 +1,29 @@
-﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model;
-using System;
-using System.Collections.Generic;
-using System.Numerics;
+﻿using System;
 using System.Runtime.CompilerServices;
-using System.Text;
+
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 {
-
+    /// <summary>
+    /// High-performance mutable struct representing the search state of a combo.
+    /// Uses bit-packing (SWAR) to maintain category counts and bitmasks for compatibility.
+    /// </summary>
     public struct CandidateCombo
     {
-       
-        // --- Stockage Optimisé ---
-        // Remplace short[] _categoryCounts.
-        // Stocke 13 compteurs de 4 bits chacun dans un seul ulong (13 * 4 = 52 bits < 64).
+        /// <summary>
+        /// Stores 13 category counters (4 bits each) within a single 64-bit integer.
+        /// [Slot 12][Slot 11]...[Slot 0]
+        /// </summary>
         public ulong PackedCategoryCounts;
 
         public TagMask CumulativeIncompatibilityMask;
         public int BaseSubs;
         public int Size;
 
-        // Table de multiplication (statique pour éviter de la recréer)
         private static readonly float[] Multipliers = { 1f, 1f, 2f, 5f, 15f, 30f, 30f, 30f };
 
-        // Initialisation (plus besoin de 'new short[]')
+        /// <summary>
+        /// Resets the candidate state for a new search branch.
+        /// </summary>
         public void Reset()
         {
             PackedCategoryCounts = 0;
@@ -31,57 +32,57 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             Size = 0;
         }
 
-        // Ajout ultra-rapide
+        /// <summary>
+        /// Updates the candidate state by adding a new tag.
+        /// Categories are updated via a single atomic addition.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddTag(Tag tag)
         {
-            // 1. Addition atomique des catégories (magie du bit-packing)
             PackedCategoryCounts += tag.CategoryAdder;
-
-            // 2. Mise à jour classique
             CumulativeIncompatibilityMask.Or(tag.IncompatibilityMask);
             BaseSubs += tag.BaseSubs;
             Size++;
         }
 
-        // Calcul du score exact à l'instant T
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int ComputeScore()
+        public readonly int ComputeScore()
         {
-            float multiplier = GetCurrentMultiplier();
-            return (int)(BaseSubs * multiplier);
+            return (int)(BaseSubs * GetCurrentMultiplier());
         }
 
-        // Helper pour extraire le multiplicateur du ulong
+        /// <summary>
+        /// Extracts and multiplies all category synergies from the packed ulong.
+        /// Manually unrolled for peak performance in the solver's hot path.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public float GetCurrentMultiplier()
+        public readonly float GetCurrentMultiplier()
         {
             float mult = 1f;
             ulong temp = PackedCategoryCounts;
 
-            // On déroule la boucle pour 13 catégories (performance critique)
-            // (temp & 0xF) récupère la valeur des 4 derniers bits (le compteur de la cat courante)
-
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 0
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 1
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 2
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 3
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 4
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 5
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 6
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 7
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 8
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 9
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 10
-            mult *= Multipliers[temp & 0xF]; temp >>= 4; // Cat 11
-            mult *= Multipliers[temp & 0xF];             // Cat 12
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF]; temp >>= 4;
+            mult *= Multipliers[temp & 0xF];
 
             return mult;
         }
 
-        // Vérification de compatibilité
+        /// <summary>
+        /// Checks if a tag is compatible with the current selection using bitwise lookup.
+        /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool CanAdd(Tag tag)
+        public readonly bool CanAdd(Tag tag)
         {
             return !CumulativeIncompatibilityMask.IsSet(tag.Index);
         }
