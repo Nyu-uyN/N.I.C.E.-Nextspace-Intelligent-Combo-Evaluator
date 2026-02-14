@@ -13,7 +13,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
     {
         private readonly StreamWriter _writer;
         private const string FileName = "latest.log";
-
+        private readonly object _lock = new();
+        private bool _isDisposed = false;
         public DiskLogger(bool isDisjoint)
         {
             try
@@ -32,13 +33,26 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
 
         public void WriteEntry(string timestamp, string message)
         {
-            _writer?.WriteLine($"[{timestamp}] {message}");
+            lock (_lock) // Personne d'autre ne peut écrire ou fermer en même temps
+            {
+                if (_isDisposed || _writer == null) return;
+
+                _writer.WriteLine($"[{timestamp}] {message}");
+                _writer.Flush();
+            }
         }
 
         public void Dispose()
         {
-            _writer?.Close();
-            _writer?.Dispose();
+            lock (_lock) // On attend que la dernière écriture en cours finisse
+            {
+                if (_isDisposed) return;
+                _isDisposed = true;
+
+                _writer?.Close();
+                _writer?.Dispose();
+                
+            }
         }
     }
 }

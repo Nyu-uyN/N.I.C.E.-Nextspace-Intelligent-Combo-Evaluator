@@ -103,8 +103,10 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         /// <param name="closeAction">Action to trigger window closure.</param>
         public ResultsViewModel(CalculationResultPackage package, Action closeAction)
         {
-             _record = package.Record ?? throw new ArgumentNullException(nameof(package.Record));
+            if (package == null) throw new ArgumentNullException(nameof(package));
+            _record = package.Record ?? throw new ArgumentNullException(nameof(package.Record));
             _closeAction = closeAction;
+            Logs.Clear();
             if (package.SessionLogs != null)
             {
                 foreach (var log in package.SessionLogs)
@@ -112,6 +114,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
                     Logs.Add(log);
                 }
             }
+            OnPropertyChanged(nameof(HasLogs));
             // Map record data to existing properties
             string modeDescription = _record.IsDisjoint
             ? $"{_record.LoadoutSize} disjoint":_record.LoadoutSize.ToString();
@@ -121,9 +124,11 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
             ExecutionTime = package.Record.BestComputationTime.ToString(@"hh\:mm\:ss\.fff");
 
             // Convert Models to ViewModels for UI binding
-            Results = new ObservableCollection<ComboViewModel>(
-                package.Record.WinningLoadout.Select((c, index) => new ComboViewModel(c) { Rank = index + 1 })
-            );
+            var comboList = _record.WinningLoadout != null
+            ? _record.WinningLoadout.Select((c, index) => new ComboViewModel(c) { Rank = index + 1 })
+            : Enumerable.Empty<ComboViewModel>();
+
+            Results = new ObservableCollection<ComboViewModel>(comboList);
 
             if (Results.Any()) SelectedCombo = Results[0];
 

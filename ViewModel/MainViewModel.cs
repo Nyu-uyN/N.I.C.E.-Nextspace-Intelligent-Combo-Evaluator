@@ -374,7 +374,10 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
             }
             finally
             {
-                CurrentLogger.FinalizeLogging();
+                if (CurrentLogger != null)
+                {
+                    await CurrentLogger.FinalizeLogging();
+                }
                 // Close and nullify the log window to ensure a clean state for the next run.
                 if (_logWindow != null)
                 {

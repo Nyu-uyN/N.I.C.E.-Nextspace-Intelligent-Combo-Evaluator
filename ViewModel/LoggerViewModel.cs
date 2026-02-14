@@ -121,9 +121,15 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         /// <summary>
         /// Ensures all resources are released and file buffers are flushed.
         /// </summary>
-        public void FinalizeLogging()
+        public async Task FinalizeLogging()
         {
             _uiRefreshTimer.Stop();
+            if (Application.Current != null)
+            {
+                await Application.Current.Dispatcher.InvokeAsync(() => { },
+                    System.Windows.Threading.DispatcherPriority.Background);
+            }
+
             _diskLogger.Dispose();
         }
     }
