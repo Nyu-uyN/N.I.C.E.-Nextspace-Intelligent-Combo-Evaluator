@@ -51,49 +51,95 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
         #region Phase 0: Potential Analysis
 
         /// <summary>
-        /// Computes the absolute performance ceiling for every tag in the pool using parallel execution.
-        /// Used to calibrate the pruning engine for subsequent mining phases.
+        /// Calculates the MaxPotentialScore for every tag in the provided working pool.
+        /// The calculation respects the incompatibility masks present in the input tags.
         /// </summary>
-        public static long[] ComputeAllMaxPotentialScores(
+        /// <param name="workingPool">The list of tags to process (Core + User Overrides).</param>
+        /// <param name="ct">Cancellation token to abort the parallel operation.</param>
+        /// <param name="logger">Optional delegate for progress logging.</param>
+        /// <param name="maxComboSize">The maximum size of a combo (default 5).</param>
+        /// <returns>A new list of Tag structs with updated MaxPotentialScore values.</returns>
+        public static List<Tag> ComputeAllMaxPotentialScores(
+            List<Tag> workingPool,
             CancellationToken ct,
-            Action<LogEventId, long> logger,
-            int maxComboSize = 5)
+            Action<LogEventId, long>? logger = null)
         {
-            var allTags = TagController.Tags;
-            int count = allTags.Count;
-            long[] results = new long[count];
+            // Convert to array for thread-safe indexed access.
+            int maxComboSize = 5;
+            var sourceTags = workingPool.ToArray();
+            int count = sourceTags.Length;
+            var resultArray = new Tag[count];
 
-            // Establish global heuristic bounds
-            int maxBaseSub = allTags.Max(t => t.BaseSubs);
-            int maxCats = allTags.Max(t => t.CategoryMask.CountBits());
+            // 1. Establish global heuristic bounds based on the input pool
+            // These values are critical for the pruning logic in the recursive solver.
+            int maxBaseSub = sourceTags.Max(t => t.BaseSubs);
+            int maxCats = sourceTags.Max(t => t.CategoryMask.CountBits());
 
-            // Precompute multiplier growth
+            // 2. Precompute multiplier growth for optimization
             float[] maxGainPowers = PrecomputeGainPowers(maxComboSize, maxCats);
 
             logger?.Invoke(LogEventId.EngineStarted, count);
 
-            Parallel.For(0, count, (i, state) =>
+            // 3. Parallel Execution
+            // Each tag is processed independently to find its best possible combination.
+            var options = new ParallelOptions
             {
-                if (ct.IsCancellationRequested) state.Stop();
+                CancellationToken = ct,
+                MaxDegreeOfParallelism = Environment.ProcessorCount
+            };
 
-                var rootTag = allTags[i];
-                var candidates = allTags.Where((t, idx) => idx != i && !rootTag.IncompatibilityMask.IsSet(t.Index))
-                                        .OrderByDescending(t => t.BaseSubs)
-                                        .ToList();
+            try
+            {
+                Parallel.For(0, count, options, (i, state) =>
+                {
+                    // Check cancellation at the iteration level
+                    if (ct.IsCancellationRequested)
+                    {
+                        state.Stop();
+                        return;
+                    }
 
-                long localBestScore = 0;
-                var initialCombo = new CandidateCombo();
-                initialCombo.AddTag(rootTag);
+                    var rootTag = sourceTags[i];
 
-                SolveMaxPotentialRecursive(initialCombo, candidates, maxComboSize, -1, ref localBestScore, maxGainPowers, maxBaseSub, maxCats);
-                results[i] = localBestScore;
+                    // Candidate Filtering:
+                    // Only select tags from the PROVIDED pool that are not the root itself 
+                    // and are not marked as incompatible in the root's mask.
+                    var candidates = sourceTags
+                        .Where((t, idx) => idx != i && !rootTag.IncompatibilityMask.IsSet(t.Index))
+                        .OrderByDescending(t => t.BaseSubs)
+                        .ToList();
 
-                // Report progress based on index
-                logger?.Invoke(LogEventId.SearchDepthChanged, i);
-            });
+                    long localBestScore = 0;
+                    var initialCombo = new CandidateCombo();
+                    initialCombo.AddTag(rootTag);
+
+                    // Execute the recursive solver
+                    SolveMaxPotentialRecursive(initialCombo, candidates, maxComboSize, -1, ref localBestScore, maxGainPowers, maxBaseSub, maxCats);
+
+                    // Reconstruction:
+                    // Create a new Tag struct with the updated score (Tags are immutable).
+                    resultArray[i] = new Tag(
+                        rootTag.Index,
+                        rootTag.BaseSubs,
+                        rootTag.IncompatibilityMask,
+                        rootTag.CategoryMask,
+                        (int)localBestScore // Update the score here
+                    );
+
+                    // Report progress
+                    logger?.Invoke(LogEventId.SearchDepthChanged, i);
+                });
+            }
+            catch (OperationCanceledException)
+            {
+                // Graceful exit on cancellation, returning partial or empty results is handled by caller logic
+                throw;
+            }
 
             logger?.Invoke(LogEventId.ComputationCompleted, count);
-            return results;
+
+            // Return the fully reconstructed list
+            return resultArray.ToList();
         }
 
         #endregion
@@ -206,7 +252,10 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
         #endregion
 
         #region Private Engine Methods (Recursive & Logic)
-
+        /// <summary>
+        /// Generates the multiplier growth table based on combo size and category limits.
+        /// Growth factor is 3x per step.
+        /// </summary>
         private static float[] PrecomputeGainPowers(int k, int maxCat)
         {
             int budget = k * maxCat;
@@ -349,22 +398,49 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
             }
         }
 
-        private static void SolveMaxPotentialRecursive(CandidateCombo current, List<Tag> candidates, int max, int last, ref long best, float[] powers, int maxSub, int maxCat)
+        /// <summary>
+        /// Recursive branch-and-bound algorithm to find the maximum score.
+        /// </summary>
+        private static void SolveMaxPotentialRecursive(
+            CandidateCombo current,
+            List<Tag> candidates,
+            int max,
+            int last,
+            ref long best,
+            float[] powers,
+            int maxSub,
+            int maxCat)
         {
             float mult = current.GetCurrentMultiplier();
             long score = (long)(current.BaseSubs * mult);
+
+            // Update local best if current branch exceeds it
             if (score > best) best = score;
+
+            // Base case: Max size reached
             if (current.Size == max) return;
 
+            // Pruning (Branch and Bound):
+            // Estimate the theoretical maximum remaining score for this branch.
+            // If even the perfect scenario cannot beat the current best, prune this branch.
             int remaining = max - current.Size;
-            if ((long)((current.BaseSubs + remaining * maxSub) * (mult * powers[remaining * maxCat])) <= best) return;
+            float projectedMaxMult = mult * powers[remaining * maxCat];
+            long projectedMaxScore = (long)((current.BaseSubs + remaining * maxSub) * projectedMaxMult);
 
+            if (projectedMaxScore <= best) return;
+
+            // Iterate through valid candidates
             for (int i = last + 1; i < candidates.Count; i++)
             {
                 var t = candidates[i];
+
+                // Compatibility Check:
+                // 1. Logic rules (CanAdd)
+                // 2. Mutual exclusion check using the Cumulative Incompatibility Mask of the combo
                 if (current.CanAdd(t) && !t.IncompatibilityMask.Any(current.CumulativeIncompatibilityMask))
                 {
-                    var next = current; next.AddTag(t);
+                    var next = current;
+                    next.AddTag(t);
                     SolveMaxPotentialRecursive(next, candidates, max, i, ref best, powers, maxSub, maxCat);
                 }
             }

@@ -3,33 +3,124 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Title="Mission Control" Height="200" Width="450" 
+        xmlns:vm="clr-namespace:N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel"
+        mc:Ignorable="d"
+        Height="220" Width="600" 
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
 
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        
+        <Style x:Key="PrimaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#22007ACC"/>
+            <Setter Property="Foreground" Value="#007ACC"/>
+            <Setter Property="BorderBrush" Value="#007ACC"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Padding" Value="15,0"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Padding" Value="15,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+
+                <DataTrigger Binding="{Binding IsDanger}" Value="True">
+                    <Setter Property="Background" Value="#28FF3232"/>
+                    <Setter Property="Foreground" Value="#FF6464"/>
+                    <Setter Property="BorderBrush" Value="#C83232"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="SecondaryButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#15FFFFFF"/>
+            <Setter Property="Foreground" Value="#BBFFFFFF"/>
+            <Setter Property="BorderBrush" Value="#22FFFFFF"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Padding" Value="15,0"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Padding" Value="15,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="1" CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#25FFFFFF"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Border Background="#2D2D30" BorderBrush="#007ACC" BorderThickness="2" CornerRadius="12">
         <Border.Effect>
-            <DropShadowEffect BlurRadius="15" Direction="270" Opacity="0.5" ShadowDepth="5"/>
+            <DropShadowEffect BlurRadius="20" Direction="270" Opacity="0.6" ShadowDepth="8"/>
         </Border.Effect>
-        <Grid Margin="25">
+
+        <Grid Margin="30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <TextBlock x:Name="TxtMessage" Grid.Row="0" Foreground="#E0E0E0" 
-                       FontFamily="Segoe UI Semibold" TextWrapping="Wrap" FontSize="13" 
+            <TextBlock Text="{Binding Message}" Grid.Row="0" Foreground="#E0E0E0" 
+                       FontFamily="Segoe UI Semibold" TextWrapping="Wrap" FontSize="15" 
                        VerticalAlignment="Center" TextAlignment="Center"/>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
 
-                <Button x:Name="BtnCancel" Click="Cancel_Click" Width="160" Margin="0,0,15,0"
-                        Background="#15FFFFFF" Foreground="#BBFFFFFF" BorderBrush="#22FFFFFF" 
-                        FontFamily="Segoe UI" Height="30"/>
+                <Button Content="{Binding TertiaryText}" 
+                        Command="{Binding ChoiceCommand}" 
+                        CommandParameter="{x:Static vm:ChoiceResult.Tertiary}"
+                        Visibility="{Binding HasTertiary, Converter={StaticResource BoolToVis}}"
+                        IsCancel="{Binding IsTertiaryCancel}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Background="Transparent" Foreground="#888"
+                        Margin="0,0,15,0"/>
 
-                <Button x:Name="BtnConfirm" Click="Confirm_Click" Width="160" IsDefault="True"
-                        Background="#22007ACC" Foreground="#007ACC" BorderBrush="#007ACC" 
-                        FontFamily="Segoe UI" Height="30"/>
+                <Button Content="{Binding SecondaryText}" 
+                        Command="{Binding ChoiceCommand}" 
+                        CommandParameter="{x:Static vm:ChoiceResult.Secondary}"
+                        Visibility="{Binding HasSecondary, Converter={StaticResource BoolToVis}}"
+                        IsCancel="{Binding IsSecondaryCancel}"
+                        Style="{StaticResource SecondaryButtonStyle}"
+                        Margin="0,0,15,0"/>
+
+                <Button Content="{Binding PrimaryText}" 
+                        Command="{Binding ChoiceCommand}" 
+                        CommandParameter="{x:Static vm:ChoiceResult.Primary}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        IsDefault="True"
+                        />
 
             </StackPanel>
         </Grid>

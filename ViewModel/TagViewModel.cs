@@ -14,7 +14,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
     /// </summary>
     public sealed class TagViewModel : INotifyPropertyChanged
     {
-        public Tag Tag { get; }
+        public Tag Tag { get;}
 
         public int Index => Tag.Index;
         public int BaseSubs => Tag.BaseSubs;
@@ -28,12 +28,12 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         /// <summary>
         /// Retrieves the display name from the static metadata dictionary.
         /// </summary>
-        public string Name => TagMetadata.Names.TryGetValue(Index, out var name) ? name : $"Unknown_{Index}";
+        public string Name => TagMetadata.GetName(Index);
 
         /// <summary>
         /// Retrieves the description/flavor text from the static metadata dictionary.
         /// </summary>
-        public string Description => TagMetadata.Descriptions.TryGetValue(Index, out var desc) ? desc : string.Empty;
+        public string Description => TagMetadata.GetDescription(Index);
 
         /// <summary>
         /// Indicates if the tag is marked as 'Controversial' in the global metadata mask.

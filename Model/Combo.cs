@@ -52,8 +52,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             sb.AppendLine("Tags used:");
             foreach (var tag in Tags)
             {
-                if (!TagMetadata.Names.TryGetValue(tag.Index, out var tagName))
-                    tagName = $"UnknownTag_{tag.Index}";
+                
+                var tagName = TagMetadata.GetName(tag.Index);
 
                 sb.AppendLine($" - [{tag.Index:D3}] {tagName,-20} (Base: {tag.BaseSubs})");
             }

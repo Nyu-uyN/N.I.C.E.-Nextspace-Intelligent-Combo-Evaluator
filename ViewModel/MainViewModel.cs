@@ -25,6 +25,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
         #region Fields and State
+        private Window _timWindow;
+        private Window _tamWindow;
         private string _computationStatus = "Solver computing, please wait, it may take awhile...";
         /// <summary>
         /// Gets or sets the status message displayed on the UI overlay during computation.
@@ -80,12 +82,12 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         /// <summary>
         /// Gets the complete list of tag view models.
         /// </summary>
-        public ObservableCollection<TagViewModel> AllTags { get; }
+        public ObservableCollection<TagViewModel> AllTags { get; set; }
 
         /// <summary>
         /// Gets the filtered view of tags for display in the main list.
         /// </summary>
-        public ICollectionView FilteredTagsView { get; }
+        public ICollectionView FilteredTagsView { get; set; }
 
         /// <summary>
         /// Gets the selectors used for batch-toggling rarities.
@@ -121,7 +123,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         #endregion
 
         #region Commands
-
+        public ICommand OpenTimCommand { get; }
+        public ICommand OpenTamCommand { get; }
         public ICommand ComputeCommand { get; }
         public ICommand SelectAllVisibleCommand { get; }
         public ICommand DeselectAllVisibleCommand { get; }
@@ -140,10 +143,46 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
 
         public MainViewModel()
         {
-            // 1. Initialize Tag ViewModels
-            var viewModels = TagController.Tags.Select(t => new TagViewModel(t)).ToList();
-            AllTags = new ObservableCollection<TagViewModel>(viewModels);
-            foreach (var tag in AllTags)
+            // 1. Initialize Batch Selectors (Static logic)
+            RarityBatchSelectors = InitializeEnumSelectors<Rarity>((val, selected) => ApplyBatchRarity(val, selected));
+            CategoryBatchSelectors = InitializeEnumSelectors<Category>((val, selected) => ApplyBatchCategory(val, selected), "None");
+
+            // 2. Initialize Commands (Static logic)
+            ComputeCommand = new RelayCommand(async _ => await HandleComputeAction());
+            SelectAllVisibleCommand = new RelayCommand(_ => BatchSetVisibleSelection(true));
+            DeselectAllVisibleCommand = new RelayCommand(_ => BatchSetVisibleSelection(false));
+            ResetFiltersCommand = new RelayCommand(_ => ResetFilters());
+            ToggleLogCommand = new RelayCommand(_ => ToggleLogWindow());
+            OpenTimCommand = new RelayCommand(_ => ExecuteOpenTim(), _ => IsInteractionEnabled);
+            OpenTamCommand = new RelayCommand(_ => ExecuteOpenTam(), _ => IsInteractionEnabled);
+
+            // 3. Subscribe to External Updates (Le lien magique avec TIM)
+            // Dès que le TagController crie "Updated!", on recharge.
+            TagController.OnDataRefreshed += OnExternalDataRefresh;
+
+            // 4. Initial Data Load
+            LoadData();
+        }
+        /// <summary>
+        /// Handles the broadcast from TagController when data (scores/rules) changes.
+        /// </summary>
+        private void OnExternalDataRefresh()
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                LoadData();
+            });
+        }
+        private void LoadData()
+        {
+            // A. Fetch fresh data from Controller
+            var rawTags = TagController.Tags; 
+
+            // B. Rebuild ViewModels
+            var viewModels = rawTags.Select(t => new TagViewModel(t)).ToList();
+
+            // C. Wire up PropertyChanged events (Selection counting)
+            foreach (var tag in viewModels)
             {
                 tag.PropertyChanged += (s, e) =>
                 {
@@ -152,22 +191,22 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
                 };
             }
 
-            // 2. Initialize Batch Selectors
-            RarityBatchSelectors = InitializeEnumSelectors<Rarity>((val, selected) => ApplyBatchRarity(val, selected));
-            CategoryBatchSelectors = InitializeEnumSelectors<Category>((val, selected) => ApplyBatchCategory(val, selected), "None");
+            // D. Update ObservableCollection
+            
+            AllTags = new ObservableCollection<TagViewModel>(viewModels);
+            OnPropertyChanged(nameof(AllTags));
 
-            // 3. Configure Collection View
+            // E. Reconfigure Collection View (Critical step)
+            
             FilteredTagsView = CollectionViewSource.GetDefaultView(AllTags);
             FilteredTagsView.Filter = FilterTagsPredicate;
 
-            // 4. Initialize Commands
-            ComputeCommand = new RelayCommand(async _ => await HandleComputeAction());
-            SelectAllVisibleCommand = new RelayCommand(_ => BatchSetVisibleSelection(true));
-            DeselectAllVisibleCommand = new RelayCommand(_ => BatchSetVisibleSelection(false));
-            ResetFiltersCommand = new RelayCommand(_ => ResetFilters());
-            ToggleLogCommand = new RelayCommand(_ => ToggleLogWindow());
-        }
+            
+            OnPropertyChanged(nameof(FilteredTagsView));
 
+            // F. Update Dependent Properties
+            OnPropertyChanged(nameof(SelectedTagsCount));
+        }
         #region Public Properties
 
         public bool IsBusy
@@ -282,7 +321,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
                 // Security check to prevent accidental loss of computation progress
                 string msg = "Are you sure to want to abort the current computation? All computation progress will be lost.";
 
-                bool result = ChoiceDialog.Show(msg, "Abort", "Nevermind", isDanger: true);
+                bool result = ChoiceDialog.Show(msg, "Abort", "Nevermind", isDanger: true)==ChoiceResult.Primary;
 
                 if (!result)
                 {
@@ -430,9 +469,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
                 $"• Computed on: {existing.ComputationDate:g}\n" +
                 $"• Execution time: {existing.BestComputationTime:hh\\:mm\\:ss\\.fff}\n" +
                 "Would you prefer to recompute or to load this known result?";
-            return ChoiceDialog.Show(message, "RECOMPUTE", "LOAD KNOWN RESULT");
-
-            
+            return ChoiceDialog.Show(message, "RECOMPUTE", "LOAD KNOWN RESULT")==ChoiceResult.Primary;            
         }
 
         private ComputationRecord ProcessFinalResults(string hash, ulong[] maskData, List<Combo> results, TimeSpan elapsed, ComputationRecord existing)
@@ -476,7 +513,44 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         }
 
         #endregion
+        /// <summary>
+        /// Opens the Tag Incompatibility Manager (T.I.M.).
+        /// Ensures only one instance of the window is active.
+        /// </summary>
+        private void ExecuteOpenTim()
+        {
+            if (_timWindow != null && _timWindow.IsLoaded)
+            {
+                _timWindow.Activate();
+                _timWindow.WindowState = WindowState.Normal;
+                return;
+            }
 
+            // Replace 'TimWindow' with your actual class name once created
+             _timWindow = new TimWindow { Owner = Application.Current.MainWindow };
+             _timWindow.ShowDialog();
+        }
+
+        /// <summary>
+        /// Opens the Tag Attributes Manager (T.A.M.).
+        /// Ensures only one instance of the window is active.
+        /// </summary>
+        private void ExecuteOpenTam()
+        {
+            if (_tamWindow != null && _tamWindow.IsLoaded)
+            {
+                _tamWindow.Activate();
+                _tamWindow.WindowState = WindowState.Normal;
+                return;
+            }
+
+            // Replace 'TamWindow' with your actual class name once created
+            // _tamWindow = new TamWindow { Owner = Application.Current.MainWindow };
+            // _tamWindow.Show();
+
+            MessageBox.Show("T.A.M. (Tag Attributes Manager) online. Telemetry hooks pending Phase 4 implementation.",
+                            "Module Launch", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
         #region Filter and Batch Logic
 
         private bool FilterTagsPredicate(object item)

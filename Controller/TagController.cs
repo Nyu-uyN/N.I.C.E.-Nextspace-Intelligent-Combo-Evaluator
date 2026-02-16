@@ -13,6 +13,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
     /// </summary>
     public static class TagController
     {
+        public static event Action? OnDataRefreshed;
+
         private static List<Tag> _tags = null!;
         private static Tag[] _tagsByIndex = null!;
         private static Tag[] _tagsByMaxPotentialScoreDesc = null!;
@@ -29,14 +31,21 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
         {
             Initialize();
         }
-
+        /// <summary>
+        /// Initializes or refreshes the active tag pool and populates global metadata.
+        /// Should be called at startup and after a T.I.M./T.A.M. Commit.
+        /// </summary>
+        public static List<Tag> InitializeAndGetActivePool()
+        {
+            return TagFactory.InitializeActivePool();
+        }
         /// <summary>
         /// Loads tags from the factory and builds internal caches and masks.
         /// Can be called again to refresh data after user modifications (TIM/TAM).
         /// </summary>
         public static void Initialize()
         {
-            _tags = TagFactory.BuildTags();
+            _tags = InitializeAndGetActivePool();
 
             // The array size is based on the actual count, assuming continuous 0-based indexing
             _tagsByIndex = new Tag[_tags.Count];
@@ -55,8 +64,16 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
             _tagsByMaxPotentialScoreDesc = _tags
                 .OrderByDescending(t => t.MaxPotentialScore)
                 .ToArray();
+            OnDataRefreshed?.Invoke();
         }
-
+        /// <summary>
+        /// Returns the factory-default Tag structs without affecting the global TagMetadata.
+        /// Intended for comparison and reset operations.
+        /// </summary>
+        public static List<Tag> GetDefaultTags()
+        {
+            return TagFactory.BuildCoreTagsOnly();
+        }
         public static IReadOnlyList<Tag> Tags => _tags;
 
         public static Tag GetByIndex(int index) => _tagsByIndex[index];
@@ -112,5 +129,15 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
 
             return result;
         }
+        /// <summary>
+        /// Facade method to save the results of a calculation session.
+        /// Delegates the conversion and persistence logic to the Factory.
+        /// </summary>
+        /// <param name="computedTags">The list of updated Tag structs.</param>
+        public static void SaveCalculationResults(List<Tag> computedTags)
+        {
+            TagFactory.Commit(computedTags);
+        }
     }
+
 }

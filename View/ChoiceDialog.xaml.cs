@@ -1,51 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.View
 {
+    /// <summary>
+    /// Interaction logic for ChoiceDialog.xaml.
+    /// Acts as a factory wrapper around the MVVM implementation.
+    /// </summary>
     public partial class ChoiceDialog : Window
     {
-        public bool Result { get; private set; }
-
-        public ChoiceDialog(string message, string confirmText, string cancelText, bool isDanger = false)
+        /// <summary>
+        /// Prevents direct instantiation. Use <see cref="Show"/> method instead.
+        /// </summary>
+        private ChoiceDialog()
         {
             InitializeComponent();
-            TxtMessage.Text = message;
-            BtnConfirm.Content = confirmText;
-            BtnCancel.Content = cancelText;
-
-            if (isDanger)
-            {
-                // If it's a danger action (like Abort), we swap colors to Red
-                BtnConfirm.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromArgb(60, 255, 50, 50));
-                BtnConfirm.Foreground = System.Windows.Media.Brushes.Tomato;
-                BtnConfirm.BorderBrush = System.Windows.Media.Brushes.Tomato;
-            }
         }
 
         /// <summary>
-        /// Static helper to call the dialog in a single line.
+        /// Displays a modal dialog with 1 to 3 buttons.
         /// </summary>
-        public static bool Show(string message, string confirm, string cancel, bool isDanger = false)
+        /// <param name="message">The question or message to display to the user.</param>
+        /// <param name="primary">The text for the primary/right-most button (e.g., "Save", "OK", "Yes").</param>
+        /// <param name="secondary">The text for the secondary/middle button (e.g., "Don't Save", "No"). Pass null to hide.</param>
+        /// <param name="tertiary">The text for the tertiary/left-most button (e.g., "Cancel"). Pass null to hide.</param>
+        /// <param name="isDanger">If set to <c>true</c>, the primary button uses a red warning style instead of blue.</param>
+        /// <returns>The <see cref="ChoiceResult"/> corresponding to the button clicked by the user.</returns>
+        public static ChoiceResult Show(string message, string primary, string? secondary = null, string? tertiary = null, bool isDanger = false)
         {
-            var dialog = new ChoiceDialog(message, confirm, cancel, isDanger)
-            {
-                Owner = Application.Current.MainWindow
-            };
-            dialog.ShowDialog();
-            return dialog.Result;
-        }
+            // 1. Instantiate View
+            var dialog = new ChoiceDialog();
 
-        private void Confirm_Click(object sender, RoutedEventArgs e) { Result = true; Close(); }
-        private void Cancel_Click(object sender, RoutedEventArgs e) { Result = false; Close(); }
+            // 2. Instantiate ViewModel
+            var vm = new ChoiceDialogViewModel(message, primary, secondary, tertiary, isDanger);
+
+            // 3. Inject Close Action so VM can close the View
+            vm.CloseAction = new System.Action(() => dialog.Close());
+
+            // 4. Bind ViewModel
+            dialog.DataContext = vm;
+
+            // 5. Handle Ownership and Positioning
+            if (Application.Current != null && Application.Current.MainWindow != null)
+            {
+                dialog.Owner = Application.Current.MainWindow;
+            }
+            else
+            {
+                dialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            }
+
+            // 6. Show Modal
+            dialog.ShowDialog();
+
+            // 7. Return Result from VM
+            return vm.UserChoice;
+        }
     }
 }
