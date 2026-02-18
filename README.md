@@ -46,3 +46,4 @@ This project is distributed under the **Creative Commons Attribution-NonCommerci
 
 ---
 *Developed by Nyu — Support the project on [Buy Me a Coffee](https://buymeacoffee.com/nyunyu)*
+*Rocket animation created by SVGator - check their work on [svgator.com](https://www.svgator.com/)*
