@@ -7,22 +7,34 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>nicelogo.ico</ApplicationIcon>
+    <ApplicationIcon>rocketlogo.ico</ApplicationIcon>
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
     <AssemblyName>NICE</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\tags.json" />
     <None Remove="nicelogo.ico" />
+    <None Remove="README.md" />
     <None Remove="Resources\nicelogo.png" />
+    <None Remove="rocketlogo.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="nicelogo.ico">
+    <Content Include="Data\tags.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="rocketlogo.ico" />
+  </ItemGroup>
+
+  
    
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+ <ItemGroup>     
     <Resource Include="Resources\nicelogo.png" />
+    <Resource Include="rocketlogo.ico" />
   </ItemGroup>
 	
 </Project>

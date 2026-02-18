@@ -144,6 +144,10 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
 
         public MainViewModel()
         {
+            if (App.IsAdminMode)
+            {
+                Application.Current.MainWindow.Title += " [ADMIN MODE - CORE EDITING]";
+            }
             // 1. Initialize Batch Selectors (Static logic)
             RarityBatchSelectors = InitializeEnumSelectors<Rarity>((val, selected) => ApplyBatchRarity(val, selected));
             CategoryBatchSelectors = InitializeEnumSelectors<Category>((val, selected) => ApplyBatchCategory(val, selected), "None");

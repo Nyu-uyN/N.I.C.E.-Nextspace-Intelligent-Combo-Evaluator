@@ -130,26 +130,71 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             File.WriteAllText(UserJsonFile, json);
         }
         /// <summary>
-        /// Generic persistence method.
-        /// Compares the provided final state of RawTags against the factory defaults.
-        /// Identifies ALL differences (Names, Scores, Rules, etc.) and saves the overrides.
+        /// Persists modifications to the storage system.
+        /// Behavior depends on the application mode:
+        /// - Standard Mode: Saves only the differences (overrides) to 'user_overrides.json'.
+        /// - Admin Mode: Overwrites the entire 'tags.json' core file with the current state and clears overrides.
         /// </summary>
-        /// <param name="finalState">The complete list of RawTags as they should appear in the application.</param>
+        /// <param name="finalState">The complete list of Tags as they appear in the application memory.</param>
         public static void Commit(List<Tag> finalState)
+        {
+            if (App.IsAdminMode)
+            {
+                CommitCoreData(finalState);
+            }
+            else
+            {
+                CommitUserOverrides(finalState);
+            }
+        }
+        /// <summary>
+        /// [ADMIN ONLY] Serializes the entire in-memory state and overwrites the Core definitions.
+        /// This effectively "bakes" the current modifications into the base game data.
+        /// </summary>
+        private static void CommitCoreData(List<Tag> finalState)
+        {
+            // 1. Reconstruct RawTags from the current Tag structs (including calculated scores)
+            var allTagsRaw = finalState
+                .Select(t => ReconstructRawTag(t))
+                .OrderBy(t => t.Id) // Ensure deterministic order
+                .ToList();
+
+            // 2. Serialize and overwrite the Core JSON file
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(allTagsRaw, options);
+
+            // Ensure the directory exists before writing (safety check)
+            AppPaths.InitializeStructure();
+            File.WriteAllText(AppPaths.TagsJson, json);
+
+            // 3. Clear the user overrides file since the changes are now part of the core data
+            File.WriteAllText(AppPaths.UserOverrideJson, "[]");            
+        }
+        /// <summary>
+        /// [STANDARD] Identifies differences between the current state and the core data,
+        /// then saves those specific changes to the user overrides file.
+        /// </summary>
+        private static void CommitUserOverrides(List<Tag> finalState)
         {
             List<RawTag> raws = new();
             var corestate = LoadCoreRaw();
+
+            // Map core state to dictionary for faster lookup by ID
+            var coreDict = corestate.ToDictionary(t => t.Id);
+
             foreach (var tag in finalState)
             {
                 var raw = ReconstructRawTag(tag);
-                if (IsDifferent(raw, corestate[raw.Id]))
+
+                // Only save the tag if it differs from the factory default
+                if (coreDict.ContainsKey(raw.Id) && IsDifferent(raw, coreDict[raw.Id]))
                 {
-                    raws.Add(raw); 
+                    raws.Add(raw);
                 }
             }
+
             WriteUserOverrides(raws);
         }
-
         /// <summary>
         /// Internal helper to decode TagMask into a list of IDs.
         /// Keeps the implementation detail of the bitmask hidden within the Factory.
