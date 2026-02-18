@@ -5,7 +5,7 @@
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="Window">
-            <Setter Property="Icon" Value="/NICE_icon.ico" />
+            <Setter Property="Icon" Value="/nicelogo.ico" />
         </Style>
     </Application.Resources>
 </Application>

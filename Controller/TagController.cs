@@ -1,6 +1,7 @@
 ﻿using N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -137,6 +138,52 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Controller
         public static void SaveCalculationResults(List<Tag> computedTags)
         {
             TagFactory.Commit(computedTags);
+        }
+        /// <summary>
+        /// Computes a structural fingerprint of the current engine state by hashing all 512 tags.
+        /// This includes categories, rarity, and precomputed incompatibility masks.
+        /// This method is called on-demand to avoid overhead during data initialization.
+        /// </summary>
+        /// <returns>A unique MD5 hash representing the current data version.</returns>
+        public static string GetGlobalEngineStateHash()
+        {
+            // Ensure the data source is available before hashing
+            if (_tagsByIndex == null || _tagsByIndex.Length == 0) return string.Empty;
+
+            using var ms = new MemoryStream();
+            using var writer = new BinaryWriter(ms);
+
+            // Precise iteration over the fixed 512-tag array to ensure deterministic output
+            foreach (var tag in _tagsByIndex)
+            {
+                // Skip empty or uninitialized slots in the index array
+                if (tag.CategoryMask.Mask == 0) continue;
+
+                // 1. TAM Structural Data
+                writer.Write(tag.Index);
+                writer.Write(tag.BaseSubs);
+                writer.Write(tag.CategoryMask.Mask);
+                writer.Write(tag.MaxPotentialScore);
+
+                // 2. TIM Structural Data (Precomputed Incompatibility Mask)
+                writer.Write(tag.IncompatibilityMask.A);
+                writer.Write(tag.IncompatibilityMask.B);
+                writer.Write(tag.IncompatibilityMask.C);
+                writer.Write(tag.IncompatibilityMask.D);
+                writer.Write(tag.IncompatibilityMask.E);
+                writer.Write(tag.IncompatibilityMask.F);
+                writer.Write(tag.IncompatibilityMask.G);
+                writer.Write(tag.IncompatibilityMask.H);
+            }
+
+            using var md5 = System.Security.Cryptography.MD5.Create();
+            byte[] hashBytes = md5.ComputeHash(ms.ToArray());
+
+            // Hexadecimal string formatting for storage in ComputationRecords
+            var sb = new System.Text.StringBuilder();
+            foreach (byte b in hashBytes) sb.Append(b.ToString("x2"));
+
+            return sb.ToString();
         }
     }
 

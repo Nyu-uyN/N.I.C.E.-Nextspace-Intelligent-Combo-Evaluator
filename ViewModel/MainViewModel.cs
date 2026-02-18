@@ -130,6 +130,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         public ICommand DeselectAllVisibleCommand { get; }
         public ICommand ResetFiltersCommand { get; }
         public ICommand ToggleLogCommand { get; }
+        public ICommand OpenAboutCommand { get; }
         #endregion
 
         #region Events
@@ -155,7 +156,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
             ToggleLogCommand = new RelayCommand(_ => ToggleLogWindow());
             OpenTimCommand = new RelayCommand(_ => ExecuteOpenTim(), _ => IsInteractionEnabled);
             OpenTamCommand = new RelayCommand(_ => ExecuteOpenTam(), _ => IsInteractionEnabled);
-
+            OpenAboutCommand = new RelayCommand(_ => ShowAbout_Click());
             // 3. Subscribe to External Updates (Le lien magique avec TIM)
             // Dès que le TagController crie "Updated!", on recharge.
             TagController.OnDataRefreshed += OnExternalDataRefresh;
@@ -354,7 +355,13 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
                 var activePool = GetActivePool();
                 var universeMask = ComputeUniverseMask(activePool);
                 var maskData = ComputationRecord.TagMaskToData(universeMask);
-                string configHash = ComputationRecord.GenerateHash(maskData, IsDisjointMode ? 10 : ResultCount, ComboSize);
+                string stateHash = TagController.GetGlobalEngineStateHash();
+
+                string configHash = ComputationRecord.GenerateHash(
+                    maskData,
+                    IsDisjointMode ? 10 : ResultCount,
+                    ComboSize,
+                    stateHash);
 
                 // 3. Existing record check (Blocking user prompt doesn't affect calculation time)
                 ComputationRecord existingRecord = null;
@@ -544,12 +551,11 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
                 return;
             }
 
-            // Replace 'TamWindow' with your actual class name once created
-            // _tamWindow = new TamWindow { Owner = Application.Current.MainWindow };
-            // _tamWindow.Show();
+            
+             _tamWindow = new TamWindow { Owner = Application.Current.MainWindow };
+             _tamWindow.Show();
 
-            MessageBox.Show("T.A.M. (Tag Attributes Manager) online. Telemetry hooks pending Phase 4 implementation.",
-                            "Module Launch", MessageBoxButton.OK, MessageBoxImage.Information);
+            
         }
         #region Filter and Batch Logic
 
@@ -661,7 +667,12 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
             _logWindow.Left = locationFromScreen.X + 50;
             _logWindow.Top = locationFromScreen.Y + 50;
         }
-
+        private void ShowAbout_Click()
+        {
+            var about = new AboutWindow();
+            about.Owner = System.Windows.Application.Current.MainWindow;
+            about.ShowDialog();
+        }
         /// <summary>
         /// Event handler to ensure the log window follows the parent window.
         /// </summary>

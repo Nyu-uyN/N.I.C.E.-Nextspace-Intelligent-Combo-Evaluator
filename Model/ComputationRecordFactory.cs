@@ -16,12 +16,9 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         /// <summary>
         /// The default filename for storing computation records.
         /// </summary>
-        private const string FileName = "ComputationRecords.json";
-
-        /// <summary>
-        /// Gets the full path to the records file located in the application's base directory.
-        /// </summary>
-        private static string FilePath => Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FileName);
+        private static string FilePath => AppPaths.RecordsJson;
+        
+        
 
         /// <summary>
         /// Configures the JSON serializer options for readable output and compatibility.

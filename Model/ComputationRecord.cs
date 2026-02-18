@@ -64,21 +64,22 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         /// </summary>
         public int ValidationCount { get; set; }
 
-        
+
 
         #endregion
 
         #region Static Utilities
 
         /// <summary>
-        /// Generates a unique MD5 hash based on the provided configuration parameters.
+        /// Generates a unique MD5 hash based on computation parameters and the global state fingerprint.
+        /// Any change in TAM or TIM data will result in a different hash, invalidating old records.
         /// </summary>
-        /// <param name="maskData">The 8-ulong array representing the TagMask.</param>
-        /// <param name="loadout">The size of the loadout.</param>
+        /// <param name="maskData">The 8-ulong array representing the TagMask of the pool.</param>
+        /// <param name="loadout">The target loadout size.</param>
         /// <param name="combo">The size of individual combos.</param>
-        /// <returns>A lowercase hexadecimal string representing the MD5 hash.</returns>
-        /// <exception cref="ArgumentException">Thrown if maskData length is not 8.</exception>
-        public static string GenerateHash(ulong[] maskData, int loadout, int combo)
+        /// <param name="stateHash">The fingerprint of all tags and incompatibilities.</param>
+        /// <returns>A unique MD5 hexadecimal string.</returns>
+        public static string GenerateHash(ulong[] maskData, int loadout, int combo, string stateHash)
         {
             if (maskData == null || maskData.Length != 8)
                 throw new ArgumentException("Universe mask data must consist of exactly 8 ulong values.", nameof(maskData));
@@ -86,22 +87,19 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
             using var ms = new MemoryStream();
             using var writer = new BinaryWriter(ms);
 
-            for (int i = 0; i < 8; i++)
-            {
-                writer.Write(maskData[i]);
-            }
-
+            // 1. Structural parameters of the specific run
+            for (int i = 0; i < 8; i++) writer.Write(maskData[i]);
             writer.Write(loadout);
             writer.Write(combo);
+
+            // 2. Global state fingerprint
+            writer.Write(Encoding.UTF8.GetBytes(stateHash));
 
             using var md5 = MD5.Create();
             byte[] hashBytes = md5.ComputeHash(ms.ToArray());
 
             StringBuilder sb = new StringBuilder();
-            foreach (byte b in hashBytes)
-            {
-                sb.Append(b.ToString("x2"));
-            }
+            foreach (byte b in hashBytes) sb.Append(b.ToString("x2"));
             return sb.ToString();
         }
 

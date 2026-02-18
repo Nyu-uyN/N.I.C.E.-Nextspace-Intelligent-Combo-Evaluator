@@ -96,13 +96,13 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
             _allTagViewModels = activePool;
             _coreDefaults = TagController.GetDefaultTags();
             MasterTags = new ObservableCollection<TagViewModel>(activePool);
-
+            
             _masterView = CollectionViewSource.GetDefaultView(MasterTags);
             _masterView.Filter = FilterMaster;
 
             _relationView = CollectionViewSource.GetDefaultView(RelationGrid);
             _relationView.Filter = FilterRelation;
-
+            
             InitializeSessionMatrix();
              ToggleCommand = new RelayCommand(id => ExecuteToggle((int)id));
              CommitCommand = new RelayCommand(_ => ExecuteCommit(), _ => HasPendingChanges);
@@ -387,7 +387,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
 
 
                     // refresh and ui reset
-
+                    foreach (var t in _allTagViewModels) t.IsDirty = false;
                     TagController.Initialize();
                     var freshTags = TagController.Tags;
 

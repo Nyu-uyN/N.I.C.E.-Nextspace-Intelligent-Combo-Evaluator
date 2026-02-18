@@ -25,7 +25,18 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         /// </summary>
         private static TagMask _baseStoryMission = TagMask.Empty;
         public static TagMask StoryMissionMask { get; private set; } = TagMask.Empty;
-        
+
+        public static Dictionary<int, string> BaseNames => _baseNames;
+
+        public static Dictionary<int, string> BaseDescriptions => _baseDescriptions;
+
+        public static Dictionary<int, string> NameOverrides => _nameOverrides;
+
+        public static Dictionary<int, string> DescOverrides => _descOverrides;
+
+        public static TagMask BaseControversial { get => _baseControversial; set => _baseControversial = value; }
+        public static TagMask BaseStoryMission { get => _baseStoryMission; set => _baseStoryMission = value; }
+
 
         /// <summary>
         /// Clears all existing metadata and reinitializes masks.
@@ -33,22 +44,22 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         /// </summary>
         public static void Reset()
         {
-            _baseNames.Clear();
-            _baseDescriptions.Clear();
-            _nameOverrides.Clear();
-            _descOverrides.Clear();
+            BaseNames.Clear();
+            BaseDescriptions.Clear();
+            NameOverrides.Clear();
+            DescOverrides.Clear();
 
             
-            _baseControversial = TagMask.Empty;
-            _baseStoryMission = TagMask.Empty;
+            BaseControversial = TagMask.Empty;
+            BaseStoryMission = TagMask.Empty;
             ControversialMask = TagMask.Empty;
             StoryMissionMask = TagMask.Empty;
         }
 
         public static void AddBaseData(int index, string name, string description, bool isControversial, bool isStoryMission)
         {
-            _baseNames[index] = name;
-            _baseDescriptions[index] = description;
+            BaseNames[index] = name;
+            BaseDescriptions[index] = description;
 
             if (isControversial)
             {
@@ -69,12 +80,12 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         }
         public static void SetNameOverride(int index, string value)
         {
-            _nameOverrides[index] = value;
+            NameOverrides[index] = value;
         }
 
         public static void SetDescriptionOverride(int index, string value)
         {
-            _descOverrides[index] = value;
+            DescOverrides[index] = value;
         }
         public static void SetControversial(int index, bool isActive)
         {
@@ -93,14 +104,14 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         }
         public static string GetName(int index)
         {
-            if (_nameOverrides.TryGetValue(index, out var val)) return val;
-            return _baseNames.TryGetValue(index, out var baseVal) ? baseVal : $"Unknown_{index}";
+            if (NameOverrides.TryGetValue(index, out var val)) return val;
+            return BaseNames.TryGetValue(index, out var baseVal) ? baseVal : $"Unknown_{index}";
         }
 
         public static string GetDescription(int index)
         {
-            if (_descOverrides.TryGetValue(index, out var val)) return val;
-            return _baseDescriptions.TryGetValue(index, out var baseVal) ? baseVal : string.Empty;
+            if (DescOverrides.TryGetValue(index, out var val)) return val;
+            return BaseDescriptions.TryGetValue(index, out var baseVal) ? baseVal : string.Empty;
         }
 
         public static bool IsControversial(int index) => ControversialMask.IsSet(index);

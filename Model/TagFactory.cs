@@ -17,8 +17,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
     /// </summary>
     public static class TagFactory
     {
-        private const string CoreJsonFile = "tags.json";
-        private const string UserJsonFile = "user_overrides.json";
+        private static string CoreJsonFile => AppPaths.TagsJson;
+        private static string UserJsonFile => AppPaths.UserOverrideJson;
 
         /// <summary>
         /// Orchestrates the initial application startup by loading merged data and populating global metadata.
@@ -105,7 +105,11 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         }
         private static List<RawTag> LoadCoreRaw()
         {
-            if (!File.Exists(CoreJsonFile)) throw new FileNotFoundException("Core tags missing.");
+            AppPaths.InitializeStructure();
+
+            if (!File.Exists(CoreJsonFile))
+                throw new FileNotFoundException($"Core tags missing at: {CoreJsonFile}");
+
             return JsonSerializer.Deserialize<List<RawTag>>(File.ReadAllText(CoreJsonFile)) ?? new();
         }
 
@@ -119,6 +123,8 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
         /// </summary>
         private static void WriteUserOverrides(List<RawTag> userOverrides)
         {
+            AppPaths.InitializeStructure();
+
             var options = new JsonSerializerOptions { WriteIndented = true };
             var json = JsonSerializer.Serialize(userOverrides, options);
             File.WriteAllText(UserJsonFile, json);

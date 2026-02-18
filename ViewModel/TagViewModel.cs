@@ -14,8 +14,18 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
     /// </summary>
     public sealed class TagViewModel : INotifyPropertyChanged
     {
-        public Tag Tag { get;}
-
+        private bool _isDirty;
+        public bool IsDirty
+        {
+            get => _isDirty;
+            set { _isDirty = value; OnPropertyChanged(); }
+        }
+        private Tag _tag;
+        public Tag Tag => _tag;
+        private string? _nameOverride;
+        private string? _descriptionOverride;
+        private bool? _controversialOverride;
+        private bool? _storyMissionOverride;
         public int Index => Tag.Index;
         public int BaseSubs => Tag.BaseSubs;
 
@@ -28,33 +38,108 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
         /// <summary>
         /// Retrieves the display name from the static metadata dictionary.
         /// </summary>
-        public string Name => TagMetadata.GetName(Index);
+        public string Name
+        {
+            get => _nameOverride ?? TagMetadata.GetName(Index);
+            set
+            {
+                if (Name == value) return;
+                _nameOverride = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Retrieves the description/flavor text from the static metadata dictionary.
         /// </summary>
-        public string Description => TagMetadata.GetDescription(Index);
+        public string Description
+        {
+            get => _descriptionOverride ?? TagMetadata.GetDescription(Index);
+            set
+            {
+                if (Description == value) return;
+                _descriptionOverride = value;
+                OnPropertyChanged();
+            }
+        }
+        /// <summary>
+        /// Gets or sets the category mask. Reconstructs the internal Tag struct to maintain data integrity.
+        /// </summary>
+        public CategoryMask CategoryMask
+        {
+            get => _tag.CategoryMask;
+            set
+            {
+                if (_tag.CategoryMask.Mask == value.Mask) return;
 
+                // Reconstruct the struct to ensure the Tag property always returns valid data
+                _tag = new Tag(_tag.Index, _tag.BaseSubs, _tag.IncompatibilityMask, value, _tag.MaxPotentialScore);
+
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Categories));
+            }
+        }
         /// <summary>
         /// Indicates if the tag is marked as 'Controversial' in the global metadata mask.
         /// </summary>
-        public bool IsControversial => TagMetadata.ControversialMask.IsSet(Index);
+        public bool IsControversial
+        {
+            get => _controversialOverride ?? TagMetadata.IsControversial(Index);
+            set
+            {
+                if (IsControversial == value) return;
+                _controversialOverride = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
-        /// Indicates if the tag is part of a Story Mission requirement.
+        /// Gets or sets the story mission status for the current session.
         /// </summary>
-        public bool IsStoryMission => TagMetadata.StoryMissionMask.IsSet(Index);
+        public bool IsStoryMission
+        {
+            get => _storyMissionOverride ?? TagMetadata.IsStoryMission(Index);
+            set
+            {
+                if (IsStoryMission == value) return;
+                _storyMissionOverride = value;
+                OnPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// A comma-separated string representation of the tag's categories.
         /// Generated on-the-fly from the bitmask.
         /// </summary>
-        public string Categories => GetCategoriesString(Tag.CategoryMask);
+        public string Categories => GetCategoriesString(_tag.CategoryMask);
 
         /// <summary>
         /// The string representation of the tag's rarity (e.g., "Viral", "Epic").
         /// </summary>
-        public string Rarity => GetRarityEnum().ToString();
+        public string Rarity
+        {
+            get => GetRarityEnum().ToString();
+            set
+            {
+                // Convert string back to BaseSubs value
+                int newBaseSubs = value switch
+                {
+                    "Common" => 5,
+                    "Uncommon" => 15,
+                    "Rare" => 45,
+                    "Epic" => 135,
+                    "Viral" => 405,
+                    _ => Tag.BaseSubs // No change if unknown
+                };
+
+                if (Tag.BaseSubs != newBaseSubs)
+                {
+                    // Reconstruct the struct to update BaseSubs
+                    _tag = new Tag(Tag.Index, newBaseSubs, Tag.IncompatibilityMask, Tag.CategoryMask, Tag.MaxPotentialScore);
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private bool _include = true;
         /// <summary>
@@ -76,9 +161,19 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.ViewModel
 
         public TagViewModel(Tag tag)
         {
-            Tag = tag;
+            _tag = tag;
         }
-
+        /// <summary>
+        /// Clears local overrides to revert to the state stored in TagMetadata.
+        /// </summary>
+        public void RevertLocalOverrides()
+        {
+            _nameOverride = null;
+            _descriptionOverride = null;
+            _controversialOverride = null;
+            _storyMissionOverride = null;
+            OnPropertyChanged(string.Empty);
+        }
         #region INotifyPropertyChanged Implementation
 
         public event PropertyChangedEventHandler? PropertyChanged;

@@ -12,7 +12,7 @@ namespace N.I.C.E.___Nextspace_Intelligent_Combo_Evaluator.Model
     public class DiskLogger : IDisposable
     {
         private readonly StreamWriter _writer;
-        private const string FileName = "latest.log";
+        private static readonly string FileName = AppPaths.LogFile;
         private readonly object _lock = new();
         private bool _isDisposed = false;
         public DiskLogger(bool isDisjoint)
